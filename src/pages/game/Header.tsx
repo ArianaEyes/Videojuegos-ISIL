@@ -1,4 +1,3 @@
-import tel from '../../assets/icons/tel.svg';
 
 
 const Header = () => {

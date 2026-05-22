@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import type { generos } from '../../types/genero'
 import { fetchVideojuegosGenero } from '../../services/videojuegos.services'
 import { useParams } from 'react-router-dom';
 

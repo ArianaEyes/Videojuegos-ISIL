@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom"
 const GenerosLista = () => {
-    const { generos, cargando, error, hasGeneros, seleccionarGenero, generoActual } = useGeneros()
+    const { generos, cargando, error, hasGeneros} = useGeneros()
     const navigate = useNavigate();
     const [abierto, setAbierto] = useState(false)
     if (cargando) return (
