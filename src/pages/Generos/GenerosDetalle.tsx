@@ -31,8 +31,8 @@ export const GenerosDetalle = () => {
             {data.map((juego) => (
               <div key={juego.id} style={{ padding: '2.5rem 1.5rem' }} className="w-[100%] rounded-lg flex flex-col
            items-center gap-2 hover:scale-[1.02] transition-transform">
-            <img src={juego.imagen_url} alt={juego.nombre} className="w-100 h-24 mb-4" />
-            <h3 className="text-white font-bold text-lg mb-2">{juego.nombre}</h3>
+            <img src={juego.imagen_url} alt={juego.nombre} className="w-[55%] mb-4 shadow-2xl rounded-lg" />
+            <h1 className="text-white font-bold text-lg mb-2">{juego.nombre}</h1>
             <p className="text-gray-400 text-md leading-relaxed">{juego.resena}</p>
           </div>
             ))}
