@@ -8,7 +8,7 @@ export const fetchVideojuegosGenero = async (
 ): Promise<Videojuego[]> => {
   const url = new URL(API_URL);
   if (id_genero) {
-    url.searchParams.append("id", id_genero.toString());
+    url.searchParams.append("id_genero", id_genero.toString());
   }
   const response = await fetch(url.toString(), { signal });
   if (!response.ok) {

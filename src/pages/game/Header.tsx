@@ -1,14 +1,21 @@
 
+type HeaderProps = {
+  imagen: string
+  titulo: string
+  parrafo: string
+}
 
-const Header = () => {
+const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
   return (
-    <header className="header text-white flex items-center justify-between px-4">
-      <div className="title">
-        <h1>Play with Us</h1>
+    <header className=" text-white flex items-center justify-between ">
+      <img src={`/icons/${imagen}`} alt="Logo" style={{width: "100%", height: "80vh"}} 
+      className="header flex-wrap" />
+      <div className="title ">
+        <h1>{titulo}</h1>
         <div className="title-div grid-cols-2 grid">
-          <div><p className='m-auto'>La mejor página para saber que jugar!</p></div>
+          <div><p className='m-auto'>{parrafo}</p></div>
           
-          <button className="btn-pucharse m-auto flex ">Buy Now </button>
+          <button className="btn-home m-auto flex ">Buy Now </button>
         </div>
       </div>
 

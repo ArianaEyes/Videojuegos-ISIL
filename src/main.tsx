@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       {
       index: true,
       lazy: async() => {
-        return { Component: (await( import('./pages/game/Game.tsx')))
+        return { Component: (await( import('./pages/Home/Home.tsx')))
           .default }
       }
     
