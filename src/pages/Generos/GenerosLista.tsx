@@ -39,7 +39,7 @@ const GenerosLista = () => {
                             <div key={itemGeneros.id} style={{ padding: '2.5rem 1.5rem' }}  className="w-[100%] rounded-lg flex flex-col
                             items-center gap-2 hover:scale-[1.02] transition-transform">
 
-                            <img onClick={() => navigate(`/generos/${itemGeneros.id}`)}  src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="mb-4" />
+                            <img onClick={() => navigate(`/generos/${itemGeneros.id}`)} src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
                             <h3 className="text-white font-bold text-lg mb-2">Juegos {itemGeneros.nombre}</h3>
 
                             </div>
