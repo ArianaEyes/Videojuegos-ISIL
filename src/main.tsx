@@ -6,8 +6,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import './index.css'
 import App from './App.tsx'
-import { GenerosDetalle } from './pages/Generos/GenerosDetalle.tsx'
+import  GenerosDetalle  from './pages/Generos/GenerosDetalle.tsx'
 import Generos from './pages/Generos/Generos.tsx'
+import VideojuegosDetalles from './pages/Videojuegos/VideojuegosDetalles.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
 {
   path: "/generos/:id",
   element: <GenerosDetalle  />,
+},
+{
+  path: "/videojuegos/:id",
+  element: <VideojuegosDetalles />,
 }
 ])
 

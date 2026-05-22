@@ -39,7 +39,7 @@ export const fetchVideojuegoDetalle = async (
 export const fetchVideojuegoById = async (
   id: number | string,
   signal?: AbortSignal,
-): Promise<Videojuego> => {
+): Promise<Videojuego[]> => {
   const response = await fetch(`${API_URL}?id=${id}`, { signal });
 
   if (!response.ok) {
