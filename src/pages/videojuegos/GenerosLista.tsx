@@ -1,0 +1,49 @@
+import { useState } from "react"
+import { useGeneros } from "./useGeneros"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+const GenerosLista = () => {
+    const { generos, cargando, error, hasGeneros, seleccionarGenero, generoActual } = useGeneros()
+    const [abierto, setAbierto] = useState(false)
+    if (cargando) return (
+        <div className="p-20 text-center space-y-4">
+            <div className="inline-block w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin" />
+            <p className="text-slate-500 font-mono text-sm tracking-widest uppercase">Cargando géneros...</p>
+        </div>
+    )
+    if (error) return (
+        <div className="p-20 text-center space-y-4">
+            <div className="inline-block w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin" />
+            <p className="text-slate-500 font-mono text-sm tracking-widest uppercase">{error}</p>
+        </div>
+    )
+  return (
+        <div className="bg-[#1a1a1a] p-8 font-sans justify-centers container ">
+            <button onClick={() => setAbierto(!abierto)}
+                    className="flex w-full justify-between items-center  md:bg-transparent border
+                     border-muted md:border-none p-3 md:p-0 rounded-md md:cursor-default shadow-sm md:shadow-none mb-4">
+                    <h3 className="m-0">Categorias</h3>
+                    <span className="hidden max-md:block">
+                        <FontAwesomeIcon icon={abierto ? faChevronUp : faChevronDown} />
+                    </span>
+                </button>
+            {!hasGeneros ? (
+                    <div>No se encotraron datos de empleados</div>
+                ) : (
+                    <div className={`${abierto ? 'block' : 'hidden'} md:block space-y-1`}>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
+                        {generos.map(itemGeneros => (
+                            <div key={itemGeneros.id} style={{ padding: '2.5rem 1.5rem' }} className="w-[100%] rounded-lg flex flex-col
+                        items-center gap-2 hover:scale-[1.02] transition-transform">
+                            <img src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
+                        <h3 className="text-white font-bold text-lg mb-2">Juegos {itemGeneros.nombre}</h3>
+                         </div>
+                        ))}
+                        </div>
+                    </div>
+                )}
+    </div>
+  )
+}
+
+export default GenerosLista

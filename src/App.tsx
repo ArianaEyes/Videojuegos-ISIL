@@ -1,12 +1,12 @@
 import './App.css'
-import Banco from './pages/bancoweb/Banco'
+import Game from './pages/game/Game'
 
 function App() {
  
 
   return (
     <>
-      <Banco/>
+      <Game/>
     </>
   )
 }
