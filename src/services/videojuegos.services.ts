@@ -8,7 +8,7 @@ export const fetchVideojuegosGenero = async (
 ): Promise<Videojuego[]> => {
   const url = new URL(API_URL);
   if (id_genero) {
-    url.searchParams.append("id_genero", id_genero.toString());
+    url.searchParams.append("id", id_genero.toString());
   }
   const response = await fetch(url.toString(), { signal });
   if (!response.ok) {
@@ -18,6 +18,7 @@ export const fetchVideojuegosGenero = async (
   }
   return response.json();
 };
+
 export const fetchVideojuegoDetalle = async (
   id?: number | string,
   signal?: AbortSignal,
@@ -32,5 +33,18 @@ export const fetchVideojuegoDetalle = async (
       `Error al obtener el videojuego: ${response.status} ${response.statusText}`,
     );
   }
+  return response.json();
+};
+
+export const fetchVideojuegoById = async (
+  id: number | string,
+  signal?: AbortSignal,
+): Promise<Videojuego> => {
+  const response = await fetch(`${API_URL}?id=${id}`, { signal });
+
+  if (!response.ok) {
+    throw new Error("Error al obtener videojuego");
+  }
+
   return response.json();
 };

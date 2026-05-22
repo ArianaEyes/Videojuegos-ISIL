@@ -2,7 +2,7 @@ import FeaturesSection from "./FeaturesSection"
 import Footer from "./Footer"
 import Header from "./Header"
 import Img from "./Img";
-import Generos from "../videojuegos/Generos";
+import Generos from "../Generos/Generos";
 
 
 const Game = () => {

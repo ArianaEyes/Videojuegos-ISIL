@@ -14,7 +14,7 @@ const imageninfo = [
 
 export default function FeaturesSection() {
   return (
-    <div className="bg-[#1a1a1a] p-8 font-sans justify-centers conteiner ">
+    <div className="bg-[#1a1a1a] p-8 font-sans justify-centers lista ">
        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
         {imageninfo.map((s, i) => (
           <div key={i} style={{ padding: '2.5rem 1.5rem' }} className="w-[100%] rounded-lg flex flex-col
