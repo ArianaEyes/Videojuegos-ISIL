@@ -7,9 +7,9 @@ const stats = [
 ];
 
 const imageninfo = [
-    { imagen: "/public/icons/telefono-inteligente.png", titulo: "Ya sean jugadores de celular", descripcion: "Son uno de los más tryhards, se esfuerzan por dominar los juegos más populares. Incluso en juegos de PC, se adaptan rápidamente a los controles táctiles y pueden competir con jugadores de teclado y ratón." },
-    { imagen:"/public/icons/pc-de-escritorio.png", titulo: "Los jugadores de PC", descripcion: "Son conocidos por su dedicación y pasión por los videojuegos. A menudo, buscan la mejor experiencia de juego posible, invirtiendo en hardware de alta gama y personalizando sus configuraciones para obtener el máximo rendimiento." },
-    { imagen:"/public/icons/consola-de-juego.png", titulo: "Los jugadores de consola", descripcion: "Son conocidos por su comodidad y accesibilidad. Disfrutan de la experiencia de juego en un entorno relajado, a menudo en el sofá, y valoran la simplicidad y la facilidad de uso que ofrecen las consolas." },
+    { imagen: "/icons/telefono-inteligente.png", titulo: "Ya sean jugadores de celular", descripcion: "Son uno de los más tryhards, se esfuerzan por dominar los juegos más populares. Incluso en juegos de PC, se adaptan rápidamente a los controles táctiles y pueden competir con jugadores de teclado y ratón." },
+    { imagen:"/icons/pc-de-escritorio.png", titulo: "Los jugadores de PC", descripcion: "Son conocidos por su dedicación y pasión por los videojuegos. A menudo, buscan la mejor experiencia de juego posible, invirtiendo en hardware de alta gama y personalizando sus configuraciones para obtener el máximo rendimiento." },
+    { imagen:"/icons/consola-de-juego.png", titulo: "Los jugadores de consola", descripcion: "Son conocidos por su comodidad y accesibilidad. Disfrutan de la experiencia de juego en un entorno relajado, a menudo en el sofá, y valoran la simplicidad y la facilidad de uso que ofrecen las consolas." },
 ]
 
 export default function FeaturesSection() {
