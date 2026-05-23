@@ -25,8 +25,8 @@ import Header from '../game/Header';
         <div className="bg-[#1a1a1a] p-8 font-sans justify-centers shadow-black">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
             {data.map((juego) => (
-              <div onClick={() => {console.log('click en juego', juego.id) 
-                navigate(`/videojuegos/${juego.id}`)}}  key={juego.id} style={{ padding: '2.5rem 1.5rem' }} className="w-[100%] rounded-lg flex flex-col
+              <div onClick={() => 
+                navigate(`/generos/${id}/videojuegos/${juego.id}`)}  key={juego.id} style={{ padding: '2.5rem 1.5rem' }} className="w-[100%] rounded-lg flex flex-col
            items-center gap-2 hover:scale-[1.02] transition-transform">
             <img  src={juego.imagen_url} alt={juego.nombre} className="w-[55%] mb-4 shadow-2xl rounded-lg" />
             <h1 className="text-white font-bold text-lg mb-2">{juego.nombre}</h1>
