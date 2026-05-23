@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { useVideojuegos } from './useVideojuegos';
 import Header from '../game/Header';
 
@@ -19,7 +19,7 @@ if (error) return <p>{error}</p>
               <h1 className="text-white">{videojuegoActual?.nombre}</h1>
             </div>
 
-            <div className=" w-[100%] grid grid-cols-1 md:grid-cols-2 gap-4 flex flex-col text-white">
+            <div className=" w-[100%] grid grid-cols-1 md:grid-cols-2 gap-4  flex-col text-white">
               <img className="w-[80%]  shadow-2xl rounded-lg" src={videojuegoActual?.imagen_url} alt={videojuegoActual?.nombre} />
               <div>
                 <p className="pt-10 text-xl w-[100%]" ><p className="font-bold">Descripción: </p> {videojuegoActual?.resena}</p>
