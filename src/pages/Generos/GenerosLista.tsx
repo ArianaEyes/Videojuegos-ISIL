@@ -5,7 +5,6 @@ import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom"
 const GenerosLista = () => {
     const { generos, cargando, error, hasGeneros} = useGeneros()
-    const navigate = useNavigate();
     const [abierto, setAbierto] = useState(false)
     if (cargando) return (
         <div className="p-20 text-center space-y-4">
