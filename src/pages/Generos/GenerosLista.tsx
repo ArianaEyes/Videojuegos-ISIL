@@ -45,7 +45,7 @@ const GenerosLista = () => {
     <img src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
     <h3 className="text-white font-bold text-lg mb-2">Juegos {itemGeneros.nombre}</h3>
   </Link>
-))}
+))} 
 
                         </div>
                     </div>
