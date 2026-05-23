@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useGeneros } from "./useGeneros"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 const GenerosLista = () => {
     const { generos, cargando, error, hasGeneros} = useGeneros()
     const navigate = useNavigate();
@@ -32,18 +32,20 @@ const GenerosLista = () => {
             {!hasGeneros ? (
                     <div>No se encotraron datos de empleados</div>
                 ) : (
-                    <div className={`${abierto ? 'block' : 'hidden'} md:block space-y-1 `}>
+                    <div className="block">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
 
                         {generos.map(itemGeneros => (
-                            <div key={itemGeneros.id} style={{ padding: '2.5rem 1.5rem' }}  className="w-[100%] rounded-lg flex flex-col
-                            items-center gap-2 hover:scale-[1.02] transition-transform">
-
-                            <img onClick={() => navigate(`/generos/${itemGeneros.id}`)} src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
-                            <h3 className="text-white font-bold text-lg mb-2">Juegos {itemGeneros.nombre}</h3>
-
-                            </div>
-                        ))}
+  <Link
+    key={itemGeneros.id}
+    to={`/generos/${itemGeneros.id}`}
+    style={{ padding: '2.5rem 1.5rem' }}
+    className="w-[100%] rounded-lg flex flex-col items-center gap-2 hover:scale-[1.02] transition-transform"
+  >
+    <img src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
+    <h3 className="text-white font-bold text-lg mb-2">Juegos {itemGeneros.nombre}</h3>
+  </Link>
+))}
 
                         </div>
                     </div>
