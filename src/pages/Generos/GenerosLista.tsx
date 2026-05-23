@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useGeneros } from "./useGeneros"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 const GenerosLista = () => {
     const { generos, cargando, error, hasGeneros} = useGeneros()
     const [abierto, setAbierto] = useState(false)
