@@ -1,7 +1,7 @@
 
-import Footer from "../game/Footer"
-import Header from "../game/Header"
-import Img from "../game/Img";
+import Footer from "../../components/Footer"
+import Header from "../../components/Header"
+import Img from "../../components/Img";
 
 
 const Contact = () => {

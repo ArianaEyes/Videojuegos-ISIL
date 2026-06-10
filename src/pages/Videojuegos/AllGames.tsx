@@ -3,7 +3,7 @@ import { useVideojuegos } from "./useVideojuegos";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import Header from "../game/Header";
+import Header from "../../components/Header";
  
 const AllGames = () => {
     const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()

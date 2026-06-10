@@ -1,6 +1,6 @@
 import {  useParams } from 'react-router-dom';
 import {  useVideojuegosId } from './useVideojuegos';
-import Header from '../game/Header';
+import Header from '../../components/Header';
 
 const VideojuegosDetalles = () => {
     const { id } = useParams()

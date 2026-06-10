@@ -1,6 +1,6 @@
 
 import './App.css'
-import Game from './pages/Home/Home'
+import Game from './pages/home/Home'
 function App() {
 
   return (

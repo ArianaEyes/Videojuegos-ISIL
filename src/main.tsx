@@ -6,12 +6,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import './index.css'
 import App from './App.tsx'
-import  GenerosDetalle  from './pages/Generos/GenerosDetalle.tsx'
-import Generos from './pages/Generos/Generos.tsx'
+import  GenerosDetalle  from './pages/generos/GenerosDetalle.tsx'
+import Generos from './pages/generos/Generos.tsx'
 import VideojuegosDetalles from './pages/Videojuegos/VideojuegosDetalles.tsx'
 import AllGames from './pages/Videojuegos/AllGames.tsx'
 import MejoresJuegos from './pages/Videojuegos/MejoresJuegos.tsx'
-import Contact from './pages/Home/Contact.tsx'
+import Contact from './pages/home/Contact.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       {
       index: true,
       lazy: async() => {
-        return { Component: (await( import('./pages/Home/Home.tsx')))
+        return { Component: (await( import('./pages/home/Home.tsx')))
           .default }
       }
     

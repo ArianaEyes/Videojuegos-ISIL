@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchVideojuegosGenero } from '../../services/videojuegos.services'
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import Header from '../game/Header';
+import Header from '../../components/Header';
  const GenerosDetalle = () => {
 
     const { id } = useParams();

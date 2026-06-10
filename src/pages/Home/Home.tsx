@@ -1,8 +1,8 @@
-import FeaturesSection from "../game/FeaturesSection"
-import Footer from "../game/Footer"
-import Header from "../game/Header"
-import Img from "../game/Img";
-import Generos from "../Generos/Generos";
+import FeaturesSection from "../../components/FeaturesSection"
+import Footer from "../../components/Footer"
+import Header from "../../components/Header"
+import Img from "../../components/Img";
+import Generos from "../generos/Generos";
 
 
 const Game = () => {
