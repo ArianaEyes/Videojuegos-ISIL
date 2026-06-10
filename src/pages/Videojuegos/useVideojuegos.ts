@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import type { Videojuego } from "../../types/videojuegos";
-import { fetchVideojuegoById } from "../../services/videojuegos.services";
+import { fetchTodosLosJuegos, fetchVideojuegoById } from "../../services/videojuegos.services";
 
-export const useVideojuegos = (id: string) => {
+export const useVideojuegosId = (id: string) => {
   const [videojuego, setVideojuego] = useState<Videojuego | null>(null);
 
   const { data, isLoading, error } = useQuery({
@@ -21,5 +21,18 @@ export const useVideojuegos = (id: string) => {
     error: error ? error.message : null,
     hasVideojuego,
     seleccionarVideojuego: setVideojuego,
+  };
+};
+export const useVideojuegos = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["videojuegos"],
+    queryFn: ({ signal }) => fetchTodosLosJuegos(signal),
+  });
+
+  return {
+    videojuegos: data ?? [],
+    cargando: isLoading,
+    error: error ? error.message : null,
+    hasVideojuegos: (data?.length ?? 0) > 0,
   };
 };

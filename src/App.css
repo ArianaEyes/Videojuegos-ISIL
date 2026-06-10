@@ -57,6 +57,17 @@ header nav{
   background-color: #E4021D;
   
 }
+.btn-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0vh .5vh;
+  font-weight: 600;
+  height: 4vh;
+  width:6rem;
+  border-radius: 8px;
+  background-color: #E4021D;
+}
 .btn-home{
   display: flex;
   justify-content: center;

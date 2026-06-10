@@ -1,10 +1,10 @@
 import {  useParams } from 'react-router-dom';
-import { useVideojuegos } from './useVideojuegos';
+import {  useVideojuegosId } from './useVideojuegos';
 import Header from '../game/Header';
 
 const VideojuegosDetalles = () => {
     const { id } = useParams()
-const { videojuegoActual, cargando, error } = useVideojuegos(id!)
+const { videojuegoActual, cargando, error } = useVideojuegosId(id!)
 
 if (cargando) return <p>Cargando...</p>
 if (error) return <p>{error}</p>

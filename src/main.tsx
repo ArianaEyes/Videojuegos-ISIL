@@ -9,6 +9,9 @@ import App from './App.tsx'
 import  GenerosDetalle  from './pages/Generos/GenerosDetalle.tsx'
 import Generos from './pages/Generos/Generos.tsx'
 import VideojuegosDetalles from './pages/Videojuegos/VideojuegosDetalles.tsx'
+import AllGames from './pages/Videojuegos/AllGames.tsx'
+import MejoresJuegos from './pages/Videojuegos/MejoresJuegos.tsx'
+import Contact from './pages/Home/Contact.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,7 +49,28 @@ const router = createBrowserRouter([
 {
   path: "/generos/:generoId/videojuegos/:id",
   element: <VideojuegosDetalles />,
+},
+{
+  path: "/allgames",
+  element: <AllGames />,
+},
+{
+  path: "/allgames/:id",
+  element: <VideojuegosDetalles />,
+},
+{
+  path: "/populares",
+  element: <MejoresJuegos />,
+},
+{
+  path: "/populares/:id",
+  element: <VideojuegosDetalles />,
 }
+,
+{
+  path: "/contact",
+  element: <Contact/>,
+},
 ])
 
 createRoot(document.getElementById('root')!).render(

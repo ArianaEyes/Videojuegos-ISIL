@@ -23,12 +23,10 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
         <div className="header-nav">
           <div className="logo"></div>
       <nav>
-        <a>Games</a>
-        <a>Services</a>
-        <a>Credits</a>
-        <a>Page</a>
-        <a>Blog</a>
-        <a>Contact Us</a>
+        <a href="/">Géneros</a>
+        <a href="/allgames">Todos los juegos</a>
+        <a href="/populares">Juegos populares</a>
+        <a href="/contact">Contact Us</a>
       </nav>
         <button style={{margin: '3vh 0 0 0 '}}className="btn-pucharse" >Buy Now </button>
       

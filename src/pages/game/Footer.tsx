@@ -11,7 +11,7 @@ const Footer = () => {
           </h2>
            <div className="flex flex-col sm:flex-row gap-4">
             
-              <button className="btn-pucharse">Buy Now </button>
+              <button className="btn-footer">Buy Now </button>
         </div>
           </div>
 

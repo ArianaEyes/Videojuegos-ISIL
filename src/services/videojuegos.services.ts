@@ -2,6 +2,7 @@ import { CONFIG } from "../config";
 import type { Videojuego } from "../types/videojuegos";
 
 const API_URL = `${CONFIG.API_URL}${CONFIG.ENDPOINTS.VIDEOJUEGOS}`;
+
 export const fetchVideojuegosGenero = async (
   id_genero?: number | string,
   signal?: AbortSignal,
@@ -18,6 +19,19 @@ export const fetchVideojuegosGenero = async (
   }
   return response.json();
 };
+export const fetchTodosLosJuegos = async (
+    signal?: AbortSignal,
+  ): Promise<Videojuego[]> => {
+    const response = await fetch(API_URL, { signal });
+    if (!response.ok) {
+      throw new Error(
+        `Error al obtener videjuegos: ${response.status} ${response.statusText}`,
+      );
+    }
+    return response.json();
+
+};
+
 
 export const fetchVideojuegoDetalle = async (
   id?: number | string,
