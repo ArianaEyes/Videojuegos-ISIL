@@ -8,9 +8,9 @@ import './index.css'
 import App from './App.tsx'
 import  GenerosDetalle  from './pages/generos/GenerosDetalle.tsx'
 import Generos from './pages/generos/Generos.tsx'
-import VideojuegosDetalles from './pages/Videojuegos/VideojuegosDetalles.tsx'
-import AllGames from './pages/Videojuegos/AllGames.tsx'
-import MejoresJuegos from './pages/Videojuegos/MejoresJuegos.tsx'
+import VideojuegosDetalles from './pages/videojuegos/VideojuegosDetalles.tsx'
+import AllGames from './pages/videojuegos/AllGames.tsx'
+import MejoresJuegos from './pages/videojuegos/MejoresJuegos.tsx'
 import Contact from './pages/home/Contact.tsx'
 
 const queryClient = new QueryClient({
