@@ -19,7 +19,7 @@ const MejoresJuegos = () => {
     if (cargando) return (
         <div className="p-20 text-center space-y-4">
             <div className="inline-block w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin" />
-            <p className="text-slate-500 font-mono text-sm tracking-widest uppercase">Cargando géneros...</p>
+            <p className="text-slate-500 font-mono text-sm tracking-widest uppercase">Cargando videojuegos...</p>
         </div>
     )
     if (error) return (

@@ -12,7 +12,7 @@ import Header from '../../components/Header';
     });
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return <div>Cargando géneros...</div>;
   }
 
   if (error instanceof Error) {

@@ -29,7 +29,7 @@ const GenerosLista = () => {
                     </span>
                 </button>
             {!hasGeneros ? (
-                    <div>No se encotraron datos de empleados</div>
+                    <div>No se encotraron datos de géneros</div>
                 ) : (
                     <div className="block">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
