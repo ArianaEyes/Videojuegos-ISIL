@@ -72,9 +72,9 @@ const router = createBrowserRouter([
   element: <Contact/>,
 },
 {
-  path: "favoritos",
+  path: "/favoritos",
   lazy: async() => 
-    ({Component: (await import('./pages/favoritos/')).default})
+    ({Component: (await import('./pages/favoritos')).default})
 },
 ])
 
