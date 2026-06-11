@@ -44,6 +44,7 @@ console.log(videojuegos.map(v => v.id));
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
 
                         {videojuegos.map(itemVideojuegos => (
+                            <div>
                             <figure
   key={itemVideojuegos.id}
   className="group relative overflow-hidden rounded-md"
@@ -90,12 +91,14 @@ console.log(videojuegos.map(v => v.id));
                                     </button>
                                   </div>
 
-                                  <div className="mt-3 text-center">
+                                  
+                                </figure>
+                                <div className="mt-3 text-center">
                                     <h3 className="text-white font-bold text-lg">
                                       Juegos {itemVideojuegos.nombre}
                                     </h3>
                                   </div>
-                                </figure>
+                                </div>
                             ))} 
                             
                         </div>
