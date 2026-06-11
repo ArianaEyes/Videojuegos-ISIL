@@ -1,4 +1,4 @@
-import React from 'react'
+
 import useFavorito from './useFavorito'
 import { tableStyles } from '../../utils/styles'
 

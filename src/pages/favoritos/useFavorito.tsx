@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { Favoritos } from '../../types/Favoritos'
 
 const useFavorito = () => {
