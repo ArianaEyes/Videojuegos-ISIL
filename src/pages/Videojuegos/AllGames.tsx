@@ -3,7 +3,7 @@ import { useVideojuegos } from "./useVideojuegos";
 import { faChevronUp, faChevronDown, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { faBasketShopping, faEye } from "@fortawesome/free-solid-svg-icons"
+import { faEye } from "@fortawesome/free-solid-svg-icons"
 import Header from "../../components/Header";
 import { agregarFavoritos } from "../../utils/functions";
  

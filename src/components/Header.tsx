@@ -1,8 +1,7 @@
 
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
-import { Link, NavLink, type NavLinkRenderProps } from "react-router-dom"
+import {  NavLink, type NavLinkRenderProps } from "react-router-dom"
 type HeaderProps = {
   imagen: string
   titulo: string

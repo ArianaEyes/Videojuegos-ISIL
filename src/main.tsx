@@ -6,12 +6,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import './index.css'
 import App from './App.tsx'
-import  GenerosDetalle  from './pages/generos/GenerosDetalle.tsx'
-import Generos from './pages/generos/Generos.tsx'
+import  GenerosDetalle  from './pages/generos/GenerosDetalle'
+import Generos from './pages/generos/Generos'
 import VideojuegosDetalles from './pages/videojuegos/VideojuegosDetalles.tsx'
-import AllGames from './pages/videojuegos/AllGames.tsx'
-import MejoresJuegos from './pages/videojuegos/MejoresJuegos.tsx'
-import Contact from './pages/contactus/Contact.tsx'
+import AllGames from './pages/videojuegos/AllGames'
+import MejoresJuegos from './pages/videojuegos/MejoresJuegos'
+import Contact from './pages/contactus/Contact'
 
 const queryClient = new QueryClient({
   defaultOptions: {

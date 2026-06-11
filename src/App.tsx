@@ -1,11 +1,11 @@
 
 import './App.css'
-import Home from './pages/home/Home.tsx'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
   return (
-    <Home/>
+     <Outlet />
   )
 }
 
