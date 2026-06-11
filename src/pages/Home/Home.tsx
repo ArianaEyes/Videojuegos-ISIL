@@ -1,11 +1,11 @@
 import FeaturesSection from "../../components/FeaturesSection"
-import Footer from "../../components/Footer"
+import Footer from "../../common/Footer"
 import Header from "../../components/Header"
 import Img from "../../components/Img";
 import Generos from "../generos/Generos";
 
 
-const Game = () => {
+const Home = () => {
   return (
     <>
     <div className="w-[100%]">
@@ -20,4 +20,4 @@ const Game = () => {
   )
 }
 
-export default Game
+export default Home

@@ -1,5 +1,5 @@
 
-import Footer from "../../components/Footer"
+import Footer from "../../common/Footer"
 import Header from "../../components/Header"
 import Img from "../../components/Img";
 

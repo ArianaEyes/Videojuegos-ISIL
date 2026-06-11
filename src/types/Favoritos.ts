@@ -1,7 +1,6 @@
 export interface Favoritos {
-    idjuego: number;
-    nombre: string;
-    rating:string;
-    resena:string;
-
+  idjuego: number;
+  nombre: string;
+  rating: string;
+  plataforma: string;
 }

@@ -71,6 +71,11 @@ const router = createBrowserRouter([
   path: "/contact",
   element: <Contact/>,
 },
+{
+  path: "favoritos",
+  lazy: async() => 
+    ({Component: (await import('./pages/favoritos/')).default})
+},
 ])
 
 createRoot(document.getElementById('root')!).render(

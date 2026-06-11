@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useVideojuegos } from "./useVideojuegos";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faChevronDown, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { faBasketShopping, faEye } from "@fortawesome/free-solid-svg-icons"
 import Header from "../../components/Header";
+import { agregarFavoritos } from "../../utils/functions";
  
 const AllGames = () => {
     const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()
@@ -12,7 +14,7 @@ const AllGames = () => {
     if (cargando) return (
         <div className="p-20 text-center space-y-4">
             <div className="inline-block w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin" />
-            <p className="text-slate-500 font-mono text-sm tracking-widest uppercase">Cargando géneros...</p>
+            <p className="text-slate-500 font-mono text-sm tracking-widest uppercase">Cargando videojuegos...</p>
         </div>
     )
     if (error) return (
@@ -21,7 +23,8 @@ const AllGames = () => {
             <p className="text-slate-500 font-mono text-sm tracking-widest uppercase">{error}</p>
         </div>
     )
-
+    
+console.log(videojuegos.map(v => v.id));
     return (
     <>
     <Header imagen="img1.jpg" titulo="Todos los juegos" parrafo="Descubre cada videojuego. y sus detalles!" />
@@ -41,17 +44,58 @@ const AllGames = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
 
                         {videojuegos.map(itemVideojuegos => (
-                            <Link
-                              key={itemVideojuegos.id}
-                              to={`/allgames/${itemVideojuegos.id}`}
-                              style={{ padding: '2.5rem 1.5rem' }}
-                              className="w-[100%] rounded-lg flex flex-col items-center 
-                              gap-2 hover:scale-[1.02] transition-transform">
-                              <img src={itemVideojuegos.imagen_url} alt={itemVideojuegos.nombre} className="w-60 h-70 mb-4 rounded-md" />
-                              <h3 className="text-white font-bold text-lg mb-2">Juegos {itemVideojuegos.nombre}</h3>
-                            </Link>
-                            ))} 
+                            <figure
+                            key={itemVideojuegos.id}
+                            className="group relative overflow-hidden rounded-md"
+                            >
+                         <img
+                           src={itemVideojuegos.imagen_url}
+                           alt={itemVideojuegos.nombre}
+                           className="w-full h-70 rounded-md object-cover transition-transform duration-300 group-hover:scale-105"
+                         />
 
+                    <div
+                         className="absolute inset-0 bg-black/60
+                             opacity-0 group-hover:opacity-100
+                                transition-opacity duration-300
+                                flex items-center justify-center gap-3"
+                            >
+                         <Link
+                           to={`/allgames/${itemVideojuegos.id}`}
+                            className={`flex pointer-events-auto
+                                                    items-center cursor-pointer justify-center w-10 h-10 rounded-full bg-white text-slate-800 hover:bg-blue-500
+                                                 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 shadow-lg focus:ring-2 focus:bg-blue-500`}>
+                         
+                            <FontAwesomeIcon icon={faEye} />
+                         </Link>
+
+                            <button
+                              type="button"
+                              onClick={() =>
+                                agregarFavoritos(
+                                  itemVideojuegos.id,
+                                  itemVideojuegos.nombre,
+                                  itemVideojuegos.rating,
+                                  itemVideojuegos.plataforma
+                                )
+                              }
+                                className={`flex pointer-events-auto
+                                                    items-center cursor-pointer justify-center w-10 h-10 rounded-full bg-white text-slate-800 hover:bg-yellow-500
+                                                 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 shadow-lg focus:ring-2 focus:bg-yellow-500`}>
+                                                
+                                    
+                                      <FontAwesomeIcon icon={faStar} />
+                                    </button>
+                                  </div>
+
+                                  <div className="mt-3 text-center">
+                                    <h3 className="text-white font-bold text-lg">
+                                      Juegos {itemVideojuegos.nombre}
+                                    </h3>
+                                  </div>
+                                </figure>
+                            ))} 
+                            
                         </div>
                     </div>
                 )}
