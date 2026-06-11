@@ -9,6 +9,18 @@ const { videojuegoActual, cargando, error } = useVideojuegosId(id!)
 
 if (cargando) return <p>Cargando...</p>
 if (error) return <p>{error}</p>
+
+const ZoomImagen = (event: any) =>{
+  const { left, top, width, height } = event.currentTarget.getBoundingClientRect()
+  const x = ((event.clientX - left) / width) * 100
+  const y = ((event.clientY - top) / height) * 100
+  event.currentTarget.style.transformOrigin = `${x}% ${y}%`
+  event.currentTarget.style.transform = 'scale(2)'
+}
+const ZoomSalida = (event: React.MouseEvent<HTMLImageElement>) => {
+  event.currentTarget.style.transform = 'scale(1)'
+  event.currentTarget.style.transformOrigin = 'center center'
+}
   return (
 
     <div>
@@ -21,7 +33,16 @@ if (error) return <p>{error}</p>
             </div>
 
             <div className=" w-[100%] grid grid-cols-1 md:grid-cols-2 gap-4  flex-col text-white">
-              <img className="w-[80%]  shadow-2xl rounded-lg" src={videojuegoActual?.imagen_url} alt={videojuegoActual?.nombre} />
+              <div className="w-[60%] overflow-hidden rounded-lg shadow-2xl">
+  <img
+    className="w-full"
+    style={{ transition: 'transform 0.1s ease', cursor: 'crosshair' }}
+    src={videojuegoActual?.imagen_url}
+    alt={videojuegoActual?.nombre}
+    onMouseMove={ZoomImagen}
+    onMouseLeave={ZoomSalida}
+  />
+</div>
               <div>
                 <p className="pt-10 text-xl w-[100%]" ><b className="font-bold">Descripción: </b> {videojuegoActual?.resena}</p>
                 <p className="pt-10 text-xl w-[100%]" ><b className="font-bold">Desarrollador: </b> {videojuegoActual?.desarrollador}</p>

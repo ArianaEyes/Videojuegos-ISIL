@@ -11,7 +11,7 @@ import Generos from './pages/generos/Generos.tsx'
 import VideojuegosDetalles from './pages/videojuegos/VideojuegosDetalles.tsx'
 import AllGames from './pages/videojuegos/AllGames.tsx'
 import MejoresJuegos from './pages/videojuegos/MejoresJuegos.tsx'
-import Contact from './pages/home/Contact.tsx'
+import Contact from './pages/contactus/Contact.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {

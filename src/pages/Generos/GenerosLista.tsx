@@ -35,16 +35,16 @@ const GenerosLista = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
 
                         {generos.map(itemGeneros => (
-  <Link
-    key={itemGeneros.id}
-    to={`/generos/${itemGeneros.id}`}
-    style={{ padding: '2.5rem 1.5rem' }}
-    className="w-[100%] rounded-lg flex flex-col items-center gap-2 hover:scale-[1.02] transition-transform"
-  >
-    <img src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
-    <h3 className="text-white font-bold text-lg mb-2">Juegos {itemGeneros.nombre}</h3>
-  </Link>
-))} 
+                          <Link
+                            key={itemGeneros.id}
+                            to={`/generos/${itemGeneros.id}`}
+                            style={{ padding: '2.5rem 1.5rem' }}
+                            className="w-[100%] rounded-lg flex flex-col items-center gap-2 hover:scale-[1.02]                      transition-transform"
+                          >
+                            <img src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
+                            <h3 className="text-white font-bold text-lg mb-2">Juegos {itemGeneros.nombre}</h3>
+                          </Link>
+                        ))} 
 
                         </div>
                     </div>
