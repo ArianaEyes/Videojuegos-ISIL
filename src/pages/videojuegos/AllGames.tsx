@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import Header from "../../components/Header";
 import { agregarFavoritos } from "../../utils/functions";
+import Footer from "../../common/Footer";
  
 const AllGames = () => {
     const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()
@@ -105,6 +106,7 @@ console.log(videojuegos.map(v => v.id));
                     </div>
                 )}
     </div>
+    <Footer/>
     </>
     )
 }

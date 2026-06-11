@@ -14,14 +14,31 @@ const useFavorito = () => {
         localStorage.setItem("favoritosArray", JSON.stringify(listaItems))
     },[listaItems])
 
-    const quitarFavorito = useCallback(()=>{
-        setListaItems([])
+    const actualizarFavoritos = useCallback((nuevosFavoritos: Favoritos[])=>{
+        localStorage.setItem("favoritosArray",JSON.stringify(nuevosFavoritos))
+        setListaItems(nuevosFavoritos)
+        window.dispatchEvent(new Event("favoritosActualizados"))
     },[])
+
+
+    const vaciarFavorito = useCallback(()=> {
+        actualizarFavoritos([])
+    },[])
+
+    const eliminarFavorito = useCallback((id:number)=>{
+        actualizarFavoritos(
+            listaItems.filter(
+                item => item.idjuego !== id
+            )
+        )
+    },[listaItems, actualizarFavoritos])
+
 
     return { 
         listaItems,
         hasListaItems: Array.isArray(listaItems) && listaItems.length>0,
-        quitarFavorito
+        vaciarFavorito,
+        eliminarFavorito
     }
   
 }
