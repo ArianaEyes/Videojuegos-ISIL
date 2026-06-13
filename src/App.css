@@ -250,3 +250,24 @@ footer{
 .formulario{
   margin: auto;
 }
+
+@media (min-width: 1264px) {
+  .header-nav nav {
+    width: 70%;
+  }
+  h1{
+    font-size: 3.4rem;
+  }
+  .title-div {
+    width: 80%;
+  }
+  .imagenes{
+  position: absolute;
+  top: 90vh;
+  display: flex;
+  gap: 1vh;
+  width: 100%;
+  height: 14vh;
+  margin-top: auto;
+}
+}
