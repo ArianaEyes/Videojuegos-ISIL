@@ -1,15 +1,20 @@
 
-import useFavorito from './useFavorito'
+
 import { tableStyles } from '../../utils/styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
+import { useGestorVideojuegos } from './useGestorVideojuegos'
 
-const FavoritosTabla = () => {
-    const { listaItems,  hasListaItems, vaciarFavorito, eliminarFavorito} = useFavorito()
+const GestionVideojuegos = () => {
+    const { videojuegos,cargando, error, hasVideojuegos,
+        insertVideojuego, actualizarVideojuego, eliminarJuego} = useGestorVideojuegos()
+
+        const [mostrarModal, setMostrarModal] = useState<'insert' | 'update' | 'delete' | null>(null)
     
   return (
     <>
-     {!hasListaItems ? (
+     {!hasVideojuegos ? (
             <div>Favoritos está vacío</div>
         ) : (
             <div>
@@ -25,16 +30,16 @@ const FavoritosTabla = () => {
                     </tr>
                 </thead>
                 <tbody className={tableStyles.tbody}>
-                    {listaItems.map(itemFavorito => (
-                        <tr key={itemFavorito.idjuego}  className={tableStyles.tr}>
-                            <td className={tableStyles.td}>{itemFavorito.idjuego}</td>
-                            <td className={tableStyles.td}>{itemFavorito.nombre}</td>
-                            <td className={tableStyles.td}>{itemFavorito.rating}</td>
-                            <td className={tableStyles.td}>{itemFavorito.plataforma}</td>
+                    {videojuegos.map(juego => (
+                        <tr key={juego.id}  className={tableStyles.tr}>
+                            <td className={tableStyles.td}>{juego.id}</td>
+                            <td className={tableStyles.td}>{juego.nombre}</td>
+                            <td className={tableStyles.td}>{juego.rating}</td>
+                            <td className={tableStyles.td}>{juego.plataforma}</td>
                             <td className={tableStyles.td}>
                                 <button
                                     className='cursor-pointer text-red-500 hover:text-red-800'
-                                    onClick={() => eliminarFavorito(itemFavorito.idjuego)}
+                                    onClick={() => eliminarJuego(juego.id)}
                                     >
                                   <FontAwesomeIcon icon={faEdit}/>                               
                                  </button>
@@ -42,7 +47,7 @@ const FavoritosTabla = () => {
                             <td className={tableStyles.td}>
                                 <button
                                     className='cursor-pointer text-red-500 hover:text-red-800'
-                                    onClick={() => eliminarFavorito(itemFavorito.idjuego)}
+                                    onClick={() => eliminarJuego(juego.id)}
                                     >
                                   <FontAwesomeIcon icon={faTrash}/>                             
                                  </button>
