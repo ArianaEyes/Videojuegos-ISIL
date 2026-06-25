@@ -10,9 +10,11 @@ export const useGestorVideojuegos = () => {
     queryFn: ({ signal }) => fetchTodosLosJuegos(signal),
   });
   const insertVideojuego = useMutation({
-    mutationFn :({nombre, id_genero, desarrollador, plataforma, resena, rating, pros, contras, imagen_url, duracion_horas, anio} : {nombre: string,id_genero:number, desarrollador:string, plataforma: string,
-  anio:string,duracion_horas:string,rating:string, imagen_url: string,
-  resena:string, pros:string, contras:string}) =>
+    mutationFn :({
+      nombre, id_genero, desarrollador, plataforma, resena, rating, pros, contras, imagen_url, duracion_horas, anio} : {nombre: string,id_genero:number, desarrollador:string, plataforma: string,
+      anio:string,duracion_horas:string,rating:string, imagen_url: string,
+      resena:string, pros:string, contras:string
+    }) =>
      insertJuegos(nombre, id_genero, desarrollador, plataforma, resena, rating, pros, contras, imagen_url, duracion_horas, anio),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ["videojuegos"]})
@@ -20,20 +22,22 @@ export const useGestorVideojuegos = () => {
   onError: (err) => console.error("Error en la insersión", err),
   })
 
-  const actualizarVideojuego = useMutation({
-    mutationFn :({id,nombre, id_genero, desarrollador, plataforma, resena, rating, pros, contras, imagen_url, duracion_horas, anio} : {id:number,nombre: string,id_genero:number, desarrollador:string, plataforma: string,
-  anio:string,duracion_horas:string,rating:string, imagen_url: string,
-  resena:string, pros:string, contras:string}) =>
-     actualizarVideojuego(id,nombre, id_genero, desarrollador, plataforma, resena, rating, pros, contras, imagen_url, duracion_horas, anio),
+  const updateVideojuego = useMutation({
+    mutationFn :({
+      id,nombre, id_genero, desarrollador, plataforma, resena, rating, pros, contras, imagen_url, duracion_horas, anio} : {id:number,nombre: string,id_genero:number, desarrollador:string, plataforma: string,
+      anio:string,duracion_horas:string,rating:string, imagen_url: string,
+      resena:string, pros:string, contras:string
+    }) =>
+     updateVideojuego(id,nombre, id_genero, desarrollador, plataforma, resena, rating, pros, contras, imagen_url, duracion_horas, anio),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ["videojuegos"]})
     },
   onError: (err) => console.error("Error en la insersión", err),
   })
 
-  const eliminarJuego = useMutation({
+  const deleteVideojuego = useMutation({
     mutationFn :({id}: {id:number}) =>
-     eliminarJuego(id),
+     deleteVideojuego(id),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ["videojuegos"]})
     },
@@ -45,8 +49,9 @@ export const useGestorVideojuegos = () => {
     cargando: isLoading,
     error: error ? error.message : null,
     hasVideojuegos: (data?.length ?? 0) > 0,
-    insertVideojuego:insertVideojuego,
-    actualizarVideojuego:actualizarVideojuego,
-     eliminarJuego:eliminarJuego,
+
+    insertVideojuego:insertVideojuego.mutateAsync,
+    updateVideojuego:updateVideojuego.mutateAsync,
+    deleteVideojuego:deleteVideojuego.mutateAsync,
   };
 };

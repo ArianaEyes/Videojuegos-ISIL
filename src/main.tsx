@@ -76,6 +76,11 @@ const router = createBrowserRouter([
   lazy: async() => 
     ({Component: (await import('./pages/favoritos')).default})
 },
+{
+  path: "/añadir",
+  lazy: async()=>
+  ({Component: (await import('./pages/gestion_videojuegos')).default})
+}
 ])
 
 createRoot(document.getElementById('root')!).render(

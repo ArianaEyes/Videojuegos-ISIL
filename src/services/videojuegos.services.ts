@@ -56,7 +56,7 @@ export const insertJuegos = async (nombre: string,id_genero:number, desarrollado
     
   } 
 
-export const eliminarJuego = async (id) => {
+export const deleteVideojuego = async (id) => {
     const formData = new FormData()
     formData.append("id", id)
     

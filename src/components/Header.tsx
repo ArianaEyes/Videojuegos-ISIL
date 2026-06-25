@@ -35,6 +35,7 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
         <a href="/allgames">Todos los juegos</a>
         <a href="/populares">Juegos populares</a>
         <a href="/contact">Contact Us</a>
+        <a href="/añadir">Añadir</a>
         <NavLink to="/favoritos" className={navLinkStyles} title="Carrito de compras">
             Favoritos <FontAwesomeIcon icon={faStar} className="size-4" /> 
           </NavLink>
