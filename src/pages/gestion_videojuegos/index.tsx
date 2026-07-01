@@ -8,7 +8,7 @@ const Gestion = () => {
       <Header imagen="img1.jpg" titulo="Favoritos" 
                 parrafo="Tus videojuegos favoritos"/>
         <section>
-            <div className='max-w-7xl mx-auto px-3 py-20'>
+            <div className='mx-auto '>
               <GestionVideojuegos />
             </div>
         </section>

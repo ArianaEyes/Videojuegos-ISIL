@@ -41,7 +41,7 @@ const GenerosLista = () => {
                             style={{ padding: '2.5rem 1.5rem' }}
                             className="w-[100%] rounded-lg flex flex-col items-center gap-2 hover:scale-[1.02]                      transition-transform"
                           >
-                            <img src={itemGeneros.imagen_url} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
+                            <img src={itemGeneros.imagen} alt={itemGeneros.nombre} className="w-24 h-24 mb-4" />
                             <h3 className="text-white font-bold text-lg mb-2">Juegos {itemGeneros.nombre}</h3>
                           </Link>
                         ))} 

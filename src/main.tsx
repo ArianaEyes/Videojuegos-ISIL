@@ -80,6 +80,11 @@ const router = createBrowserRouter([
   path: "/añadir",
   lazy: async()=>
   ({Component: (await import('./pages/gestion_videojuegos')).default})
+},
+{
+  path: "/login",
+  lazy: async()=>
+  ({Component: (await import('./pages/login')).default})
 }
 ])
 

@@ -1,9 +1,8 @@
 export const tableStyles = {
   container:
     "w-full overflow-x-auto shadow-sm border border-slate-200 rounded-lg",
-  table: "min-w-full text-left text-slate-700",
-  thead:
-    "bg-slate-50 border-b border-slate-200 uppercase text-slate-500 font-semibold",
+  table: "w-full bg-[#f5f5f5] text-slate-700 border-collapse",
+  thead: " border-b border-slate-200 uppercase text-slate-500 font-semibold",
   th: "px-6 py-4",
   tbody: "divide-y divide-slate-100",
   tr: "hover:bg-slate-50 transition-colors h-100",

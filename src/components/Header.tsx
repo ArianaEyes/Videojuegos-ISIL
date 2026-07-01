@@ -17,7 +17,7 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
   return (
     <header className=" text-white flex items-center justify-between ">
       <img src={`/icons/${imagen}`} alt="Logo" style={{width: "100%", height: "80vh"}} 
-      className="header flex-wrap" />
+      className="header flex-wrap image-header" />
       <div className="title ">
         <h1>{titulo}</h1>
         <div className="title-div grid-cols-2 grid">
@@ -39,6 +39,7 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
         <NavLink to="/favoritos" className={navLinkStyles} title="Carrito de compras">
             Favoritos <FontAwesomeIcon icon={faStar} className="size-4" /> 
           </NavLink>
+          <a href="/login">Login</a>
       </nav>
         <button style={{margin: '3vh 0 0 0 '}}className="btn-pucharse" >Buy Now </button>
       
