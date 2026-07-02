@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useVideojuegos } from "./useVideojuegos";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faChevronDown, faStar, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
+import { agregarFavoritos } from "../../utils/functions";
 
 
 const MejoresJuegos = () => {
@@ -48,15 +49,61 @@ const MejoresJuegos = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
         
                                 {juegosFiltrados.map(videojuegos => (
+                                    <div>
+                            <figure
+                            key={videojuegos.id}
+                            className="group relative overflow-hidden rounded-md"
+                            >
+  <div className="w-full h-56 overflow-hidden rounded-md">
+    <img
+      src={videojuegos.imagen_url}
+      alt={videojuegos.nombre}
+      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+  </div>
+   <div
+                         className="absolute inset-0 bg-black/60
+                             opacity-0 group-hover:opacity-100
+                                transition-opacity duration-300
+                                flex items-center justify-center gap-3"
+                            >
+                                    
                                     <Link
                                       key={videojuegos.id}
                                       to={`/populares/${videojuegos.id}`}
-                                      style={{ padding: '2.5rem 1.5rem' }}
-                                      className="w-[100%] rounded-lg flex flex-col items-center 
-                                      gap-2 hover:scale-[1.02] transition-transform">
-                                      <img src={videojuegos.imagen_url} alt={videojuegos.nombre} className="w-60 h-70 mb-4 rounded-md" />
-                                      <h3 className="text-white font-bold text-lg mb-2">Juegos {videojuegos.nombre}</h3>
+                                      className="flex pointer-events-auto
+                                                    items-center cursor-pointer justify-center w-10 h-10 rounded-full bg-white text-slate-800 hover:bg-blue-500
+                                                 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 shadow-lg focus:ring-2 focus:bg-blue-500`">
+                                    
+                                    <FontAwesomeIcon icon={faEye} />
                                     </Link>
+                                    <button
+                                                                  type="button"
+                                                                  onClick={() =>
+                                                                    agregarFavoritos(
+                                                                      videojuegos.id,
+                                                                      videojuegos.nombre,
+                                                                      videojuegos.rating,
+                                                                      videojuegos.plataforma
+                                                                    )
+                                                                  }
+                                                                    className={`flex pointer-events-auto
+                                                                                        items-center cursor-pointer justify-center w-10 h-10 rounded-full bg-white text-slate-800 hover:bg-yellow-500
+                                                                                     hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 shadow-lg focus:ring-2 focus:bg-yellow-500`}>
+                                                                                    
+                                                                        
+                                                                          <FontAwesomeIcon icon={faStar} />
+                                                                        </button>
+                                                                      </div>
+                                    
+                                                                      
+                                                                    </figure>
+                                                                    <div className="mt-3 text-center">
+                                                                        <h3 className="text-white font-bold text-lg">
+                                                                          Juegos {videojuegos.nombre}
+                                                                        </h3>
+                                                                      </div>
+                                                                    </div>
                                     ))} 
         
                                 </div>

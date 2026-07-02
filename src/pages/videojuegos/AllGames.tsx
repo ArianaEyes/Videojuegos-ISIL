@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useVideojuegos } from "./useVideojuegos";
-import { faChevronUp, faChevronDown, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faChevronDown, faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { faEye } from "@fortawesome/free-solid-svg-icons"
@@ -11,6 +11,7 @@ import Footer from "../../common/Footer";
 const AllGames = () => {
     const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()
     const [abierto, setAbierto] = useState(false)
+    const [juegoSeleccionado, setJuegoSeleccionado] = useState<any>(null)
 
     if (cargando) return (
         <div className="p-20 text-center space-y-4">
@@ -47,9 +48,9 @@ console.log(videojuegos.map(v => v.id));
                         {videojuegos.map(itemVideojuegos => (
                             <div>
                             <figure
-  key={itemVideojuegos.id}
-  className="group relative overflow-hidden rounded-md"
->
+                            key={itemVideojuegos.id}
+                            className="group relative overflow-hidden rounded-md"
+                            >
   <div className="w-full h-56 overflow-hidden rounded-md">
     <img
       src={itemVideojuegos.imagen_url}
@@ -105,8 +106,45 @@ console.log(videojuegos.map(v => v.id));
                         </div>
                     </div>
                 )}
+
     </div>
     <Footer/>
+
+      {/* MODAL CON IMAGEN GRANDE Y 7+ DATOS */}
+            {juegoSeleccionado && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+                    <div className="bg-white rounded-2xl w-full max-w-3xl relative shadow-2xl p-8">
+                        <button onClick={() => setJuegoSeleccionado(null)} className="absolute top-4 right-4 text-zinc-400 hover:text-black">
+                            <FontAwesomeIcon icon={faTimes} size="lg" />
+                        </button>
+                        
+                        <div className="flex flex-col md:flex-row gap-8">
+                            {/* IMAGEN MÁS GRANDE */}
+                            <div className="w-full md:w-1/2 bg-zinc-50 rounded-xl p-6 flex items-center justify-center">
+                                <img src={juegoSeleccionado.imagen_url} alt={juegoSeleccionado.nombre} className="max-h-80 object-contain" />
+                            </div>
+                            
+                            <div className="w-full md:w-1/2 space-y-4">
+                                <h3 className="text-2xl font-black">{juegoSeleccionado.nombre}</h3>
+                                <p className="text-[#C1FF00] font-bold text-3xl">{juegoSeleccionado.precio}</p>
+                                
+                                {/* LISTA DE 7+ DATOS */}
+                                <ul className="text-sm text-zinc-600 space-y-2 border-t pt-4">
+                                    <li><strong>Marca:</strong> {juegoSeleccionado.marca}</li>
+                                    <li><strong>SKU:</strong> {juegoSeleccionado.sku}</li>
+                                    <li><strong>Garantía:</strong> {juegoSeleccionado.garantia_meses} meses</li>
+                                    <li><strong>Stock:</strong> {juegoSeleccionado.stock} unidades</li>
+                                    <li><strong>Categoría ID:</strong> {juegoSeleccionado.id_categoria}</li>
+                                    <li><strong>Peso:</strong> {juegoSeleccionado.peso}</li>
+                                    <li><strong>Dimensiones:</strong> {juegoSeleccionado.dimensiones}</li>
+                                </ul>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
     </>
     )
 }
