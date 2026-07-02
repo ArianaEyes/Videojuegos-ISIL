@@ -6,6 +6,7 @@ export const CONFIG = {
     VIDEOJUEGOS: "/videojuegos.php",
     GENEROS: "/generos.php",
     RESENAS_USUARIOS: "/resenas_usuarios.php",
+    LOGIN: "/login.php",
   },
 
   VERSION: "1.0.0",

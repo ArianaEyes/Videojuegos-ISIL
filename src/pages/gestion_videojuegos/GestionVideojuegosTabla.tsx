@@ -49,6 +49,7 @@ const GestionVideojuegos = () => {
         }catch(error){
             console.log(error)
         }
+        console.log('Insertando videojuego...', {nombre});
         
 
     }

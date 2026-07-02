@@ -19,6 +19,7 @@ export const fetchVideojuegosGenero = async (
   }
   return response.json();
 };
+
 export const fetchTodosLosJuegos = async (
   signal?: AbortSignal,
 ): Promise<Videojuego[]> => {
@@ -30,6 +31,8 @@ export const fetchTodosLosJuegos = async (
   }
   return response.json();
 };
+
+// ── INSERT: el PHP lee JSON del body con json_decode(file_get_contents("php://input")) ──
 export const insertJuegos = async (
   nombre: string,
   id_genero: number,
@@ -43,27 +46,28 @@ export const insertJuegos = async (
   pros: string,
   contras: string,
 ) => {
-  const formData = new FormData();
-  formData.append("nombre", nombre);
-  formData.append("id_genero", id_genero.toString());
-  formData.append("desarrollador", desarrollador);
-  formData.append("plataforma", plataforma);
-  formData.append("anio", anio);
-  formData.append("duracion_horas", duracion_horas);
-  formData.append("rating", rating);
-  formData.append("imagen_url", imagen_url);
-  formData.append("resena", resena);
-  formData.append("pros", pros);
-  formData.append("contras", contras);
-
   const response = await fetch(API_URL, {
     method: "POST",
-    body: formData,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      nombre,
+      id_genero,
+      desarrollador,
+      plataforma,
+      anio,
+      duracion_horas,
+      rating,
+      imagen_url,
+      resena,
+      pros,
+      contras,
+    }),
   });
   if (!response.ok) throw new Error("Error al añadir videojuego");
-  return response.text;
+  return response.json();
 };
 
+// ── UPDATE: el PHP lee el id de $_GET['id'] (query string) y el resto de JSON body ──
 export const updateVideojuego = async (
   id: number | string,
   nombre: string,
@@ -78,39 +82,40 @@ export const updateVideojuego = async (
   pros: string,
   contras: string,
 ) => {
-  const API_URL = `${CONFIG.API_URL}${CONFIG.ENDPOINTS.VIDEOJUEGOS}`;
-  const formData = new FormData();
-  formData.append("id", id.toString());
-  formData.append("nombre", nombre);
-  formData.append("id_genero", id_genero.toString());
-  formData.append("desarrollador", desarrollador);
-  formData.append("plataforma", plataforma);
-  formData.append("anio", anio);
-  formData.append("duracion_horas", duracion_horas);
-  formData.append("rating", rating);
-  formData.append("imagen_url", imagen_url);
-  formData.append("resena", resena);
-  formData.append("pros", pros);
-  formData.append("contras", contras);
+  const url = new URL(API_URL);
+  url.searchParams.append("id", id.toString());
 
-  const response = await fetch(API_URL, {
+  const response = await fetch(url.toString(), {
     method: "PUT",
-    body: formData,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      nombre,
+      id_genero,
+      desarrollador,
+      plataforma,
+      anio,
+      duracion_horas,
+      rating,
+      imagen_url,
+      resena,
+      pros,
+      contras,
+    }),
   });
   if (!response.ok) throw new Error("Error al actualizar videojuego");
-  return response.text();
+  return response.json();
 };
 
+// ── DELETE: el PHP lee el id de $_GET['id'], sin body ──
 export const deleteVideojuego = async (id: number | string) => {
-  const formData = new FormData();
-  formData.append("id", id.toString());
+  const url = new URL(API_URL);
+  url.searchParams.append("id", id.toString());
 
-  const response = await fetch(API_URL, {
-    method: "POST",
-    body: formData,
+  const response = await fetch(url.toString(), {
+    method: "DELETE",
   });
   if (!response.ok) throw new Error("Error al eliminar videojuego");
-  return response.text;
+  return response.json();
 };
 
 export const fetchVideojuegoDetalle = async (
@@ -135,10 +140,8 @@ export const fetchVideojuegoById = async (
   signal?: AbortSignal,
 ): Promise<Videojuego[]> => {
   const response = await fetch(`${API_URL}?id=${id}`, { signal });
-
   if (!response.ok) {
     throw new Error("Error al obtener videojuego");
   }
-
   return response.json();
 };
