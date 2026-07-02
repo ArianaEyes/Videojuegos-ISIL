@@ -6,14 +6,13 @@ export const loginService = async (email: string, password: string) => {
   const formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);
+
   const response = await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
+    body: formData,
   });
-  if (!response.ok) throw new Error("Error al añadir videojuego");
+
+  if (!response.ok) throw new Error("Error al iniciar sesión");
+
   return response.json();
 };
