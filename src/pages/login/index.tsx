@@ -1,6 +1,37 @@
+import { useState } from "react"
 import Header from "../../components/Header"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../context/AuthContext"
+import { loginService } from "../../services/auth.service"
+import { useMutation } from "@tanstack/react-query"
 
 const Login = () => {
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  const navigate = useNavigate()
+  const { login } = useAuth()
+
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: ({ email, password }: { email: string, password: string }) => 
+      loginService(email, password)
+  })
+
+  const handleSubmit = async (formData: FormData) => {
+    setErrorMsg(null)
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+
+    try {
+      const result = await mutateAsync({ email, password })
+      if (result === -1) setErrorMsg('La cuenta no existe')
+      else if (result === -2) setErrorMsg('Contraseña incorrecta')
+      else if (Array.isArray(result) && result.length > 0) {
+        login(result[0])
+        navigate('/generos')
+      }
+    } catch {
+      setErrorMsg('Error al conectar con el servidor')
+    }
+  }
   return (
     <>
        <Header imagen="img1.jpg" titulo="Login" parrafo="Inicia sesión para acceder a tu cuenta y disfrutar de todas las funciones de nuestra aplicación."/>
@@ -14,7 +45,12 @@ const Login = () => {
       Inicia sesión para continuar
     </p>
 
-    <form className="space-y-5 w-full">
+    <form action={handleSubmit} className="space-y-5 w-full">
+      {errorMsg && (
+              <div className="p-3 bg-red-500/10 border border-red-500/50 text-red-500 text-xs font-bold uppercase tracking-widest rounded text-center">
+                {errorMsg}
+              </div>
+            )}
       <div>
         <label
           htmlFor="username"
@@ -24,11 +60,14 @@ const Login = () => {
         </label>
 
         <input
+          name="email"
+          required
           type="text"
           id="username"
+          disabled={isPending}
           placeholder="Ingresa tu usuario"
           className="w-full rounded-lg bg-gray-800 border border-gray-600 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-400/30"
-        />
+         />
       </div>
 
       <div >
@@ -40,7 +79,9 @@ const Login = () => {
         </label>
 
         <input
+          required
           type="password"
+          name="password"
           id="password"
           placeholder="Ingresa tu contraseña"
           className="w-full rounded-lg bg-gray-800 border border-gray-600 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-400/30"

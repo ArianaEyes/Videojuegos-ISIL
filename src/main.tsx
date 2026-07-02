@@ -12,6 +12,7 @@ import VideojuegosDetalles from './pages/videojuegos/VideojuegosDetalles.tsx'
 import AllGames from './pages/videojuegos/AllGames'
 import MejoresJuegos from './pages/videojuegos/MejoresJuegos'
 import Contact from './pages/contactus/Contact'
+import { AuthProvider } from './context/AuthContext.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -88,11 +89,15 @@ const router = createBrowserRouter([
 }
 ])
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router = { router } />
-      <ReactQueryDevtools initialIsOpen={false}/>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-  </StrictMode>,
-)
+  </StrictMode>
+);
+

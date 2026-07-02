@@ -8,7 +8,7 @@ import Header from '../../components/Header';
     const { id } = useParams();
   const {data = [], isLoading, error} = useQuery({
     queryKey: ["videojuegos", id],
-    queryFn: () => fetchVideojuegosGenero(id),
+    queryFn: () => fetchVideojuegosGenero(Number(id)),
     });
 
   if (isLoading) {
