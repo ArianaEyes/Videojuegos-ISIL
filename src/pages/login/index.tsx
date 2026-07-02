@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
 import { loginService } from "../../services/auth.service"
 import { useMutation } from "@tanstack/react-query"
+import Footer from "../../common/Footer"
 
 const Login = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -107,6 +108,7 @@ const Login = () => {
     </p>
   </div>
 </div>
+<Footer/>
        
     </>
   )
