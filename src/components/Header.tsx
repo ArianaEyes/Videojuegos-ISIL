@@ -1,12 +1,14 @@
 
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {  NavLink, type NavLinkRenderProps } from "react-router-dom"
+import { Link,  NavLink, type NavLinkRenderProps } from "react-router-dom"
+import { useAuth } from "../context/AuthContext" 
 type HeaderProps = {
   imagen: string
   titulo: string
   parrafo: string
 }
+  const { isAuthenticated, logout} = useAuth()
 
 const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
   const navLinkStyles = ({ isActive }: NavLinkRenderProps): string => {
@@ -39,7 +41,9 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
         <NavLink to="/favoritos" className={navLinkStyles} title="Carrito de compras">
             Favoritos <FontAwesomeIcon icon={faStar} className="size-4" /> 
           </NavLink>
+         {isAuthenticated ? (
           <a href="/login">Login</a>
+      )}
       </nav>
         <button style={{margin: '3vh 0 0 0 '}}className="btn-pucharse" >Buy Now </button>
       
