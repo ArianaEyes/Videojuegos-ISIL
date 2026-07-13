@@ -40,7 +40,7 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
         <Link to="/populares"><h5 className=' text-white tracking-tighter cursor-pointer'>Juegos populares</h5></Link>
         <Link to="/contact"><h5 className=' text-white tracking-tighter cursor-pointer'>Contact Us</h5></Link>
         <Link to="/añadir"><h5 className=' text-white tracking-tighter cursor-pointer'>Añadir</h5></Link>
-        <NavLink to="/favoritos" className={`{navLinkStyles} navlink`} title="Carrito de compras">
+        <NavLink to="/favoritos" className={`${navLinkStyles} navlink`} title="Carrito de compras">
           <FontAwesomeIcon icon={faStar} className="size-4" /> 
           <h5>Favoritos</h5>
           
