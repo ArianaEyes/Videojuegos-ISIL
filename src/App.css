@@ -26,7 +26,7 @@ header{
   top: 2vh;
   left: 20vh;
   width: 80%;
-  height: 12%;
+  height: 10%;
   display: flex;
   justify-content: space-around;
   
@@ -35,7 +35,7 @@ header{
 .logo{
   background-image:url('../public/icons/videojuegos.png');
   background-size: cover;
-  width: 7%;
+  width: 6%;
 }
 
 header nav{
@@ -86,7 +86,7 @@ header nav{
   
 }
 .image-header{
-  filter: blur(20px) brightness(50%);
+  filter: blur(6px) brightness(40%);
    transform: scale(1.1);
 }
 .imagenes{
@@ -127,6 +127,15 @@ header nav{
 .lista{
   padding-top: 30vh;
 }
+.navlink{
+  width: 10%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.fuente{
+  font-family: "Oxanium", sans-serif;
+}
 .title{
   position: absolute;
   left: 36%;
@@ -137,10 +146,20 @@ header nav{
   flex-wrap: wrap;
   text-align: center;
 }
-h1{
-  font-family: "Boldonse", system-ui;
+h5{
+  font-family: "Oxanium", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.titulo{
+  font-family: "Oxanium", sans-serif;
   width: 100%;
-  font-size: 4rem;
+  font-size: 5rem;
+}
+.m-auto{
+  font-family: "Oxanium", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 .title-div{
   margin: auto;
@@ -225,7 +244,7 @@ form{
 }
 footer{
   position: relative;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.544)), url(/public/icons/i2.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.544)), url(/public/icons/img9.jpg);
   background-size: cover;
   background-position: center;
   width: 100%;

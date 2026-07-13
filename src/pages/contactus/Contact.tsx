@@ -8,7 +8,7 @@ const Contact = () => {
   return (
     <>
     <div className="w-[100%]">
-      <Header imagen="i1.jpg" titulo="Contact Us" parrafo="Estás creando un juego? Contáctanos y lo añadiremos!"/>
+      <Header imagen="img8.jpg" titulo="Contact Us" parrafo="Estás creando un juego? Contáctanos y lo añadiremos!"/>
       <Img/>
       
         <Contactanos/>

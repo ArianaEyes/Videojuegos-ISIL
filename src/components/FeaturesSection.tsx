@@ -20,7 +20,7 @@ export default function FeaturesSection() {
           <div key={i} style={{ padding: '2.5rem 1.5rem' }} className="w-[100%] rounded-lg flex flex-col
            items-center gap-2 hover:scale-[1.02] transition-transform">
             <img src={s.imagen} alt={s.titulo} className="w-24 h-24 mb-4" />
-            <h3 className="text-white font-bold text-lg mb-2">{s.titulo}</h3>
+            <h3 className="text-white font-bold text-lg mb-2 fuente">{s.titulo}</h3>
             <p className="text-gray-400 text-sm leading-relaxed">{s.descripcion}</p>
           </div>
         ))}

@@ -27,7 +27,7 @@ const Login = () => {
       else if (result === -2) setErrorMsg('Contraseña incorrecta')
       else if (Array.isArray(result) && result.length > 0) {
         login(result[0])
-        navigate('/generos')
+        navigate('/')
       }
     } catch {
       setErrorMsg('Error al conectar con el servidor')

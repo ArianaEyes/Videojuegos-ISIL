@@ -1,5 +1,5 @@
 
-import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { faIdCard, faStar, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link,  NavLink, type NavLinkRenderProps } from "react-router-dom"
 import { useAuth } from "../context/AuthContext" 
@@ -8,7 +8,7 @@ type HeaderProps = {
   titulo: string
   parrafo: string
 }
-  const { isAuthenticated, logout} = useAuth()
+  
 
 const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
   const navLinkStyles = ({ isActive }: NavLinkRenderProps): string => {
@@ -16,12 +16,13 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
       isActive ? " text-white" : "hover:text-white hover:bg-accenet" 
     }`
   }
+  const { isAuthenticated, logout} = useAuth()
   return (
     <header className=" text-white flex items-center justify-between ">
       <img src={`/icons/${imagen}`} alt="Logo" style={{width: "100%", height: "80vh"}} 
       className="header flex-wrap image-header" />
       <div className="title ">
-        <h1>{titulo}</h1>
+        <p className="titulo">{titulo}</p>
         <div className="title-div grid-cols-2 grid">
           <div><p className='m-auto'>{parrafo}</p></div>
           
@@ -33,24 +34,45 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
         <div className="header-nav">
           <div className="logo"></div>
       <nav>
-        <a href="/">Géneros</a>
-        <a href="/allgames">Todos los juegos</a>
-        <a href="/populares">Juegos populares</a>
-        <a href="/contact">Contact Us</a>
-        <a href="/añadir">Añadir</a>
-        <NavLink to="/favoritos" className={navLinkStyles} title="Carrito de compras">
-            Favoritos <FontAwesomeIcon icon={faStar} className="size-4" /> 
-          </NavLink>
-         {isAuthenticated ? (
-          <a href="/login">Login</a>
-      )}
-      </nav>
-        <button style={{margin: '3vh 0 0 0 '}}className="btn-pucharse" >Buy Now </button>
-      
-        </div>
-
         
+        <Link to="/"><h5 className=' text-white tracking-tighter cursor-pointer'>Géneros</h5></Link>
+        <Link to="/allgames"><h5 className=' text-white tracking-tighter cursor-pointer'>Todos los juegos</h5></Link>
+        <Link to="/populares"><h5 className=' text-white tracking-tighter cursor-pointer'>Juegos populares</h5></Link>
+        <Link to="/contact"><h5 className=' text-white tracking-tighter cursor-pointer'>Contact Us</h5></Link>
+        <Link to="/añadir"><h5 className=' text-white tracking-tighter cursor-pointer'>Añadir</h5></Link>
+        <NavLink to="/favoritos" className={`{navLinkStyles} navlink`} title="Carrito de compras">
+          <FontAwesomeIcon icon={faStar} className="size-4" /> 
+          <h5>Favoritos</h5>
+          
+        </NavLink>
+         {isAuthenticated ? (
+          <div className="flex items-center gap-2">
 
+            <button className='bg-[#ff0000a2] hover:bg-white hover:text-black font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-lg shadow-black/20 cursor-pointer text-sm tracking-widest uppercase'>
+            <Link to="/login">
+            <FontAwesomeIcon icon={faIdCard} className="size-2 mr-1" />
+              Perfil
+            </Link>
+            </button>
+
+            <button 
+              type="button"
+              onClick={logout}
+              className="px-5 py-3 border border-slate-800 hover:border-red-500 hover:text-red-500 rounded-full         cursor-pointer text-sm font-bold tracking-widest uppercase transition-all duration-300"
+            >
+              Cerrar sesión
+            </button>
+          </div>
+          ) : (
+            <button className='bg-[#ff0000a2] hover:bg-white hover:text-black font-bold px-8 py-3 rounded-full        transition-all duration-300 shadow-lg shadow-black/20 cursor-pointer text-sm tracking-widest uppercase'>
+            <Link to="/login">
+              <FontAwesomeIcon icon={faUser} className="size-2 mr-0.5" />
+              Iniciar Sesión
+            </Link>
+            </button>
+          )}
+      </nav>
+        </div>
     </header>
   )
 }

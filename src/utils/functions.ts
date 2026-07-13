@@ -18,13 +18,13 @@ export const agregarFavoritos = (
       ? []
       : JSON.parse(localStorage.getItem("favoritosArray") || "[]");
 
-      const index = favoritos.findIndex(
-        item => item,idjuego === itemFavoritos.idjuego
-      )
+  const index = favoritos.findIndex(
+    (item) => item.idjuego === itemFavoritos.idjuego,
+  );
 
-      if(index===1){
-        favoritos.push(itemFavoritos)
-      }
+  if (index === 1) {
+    favoritos.push(itemFavoritos);
+  }
   favoritos.push(itemFavoritos);
   localStorage.setItem("favoritosArray", JSON.stringify(favoritos));
 };

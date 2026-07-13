@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode, useContext } from "react"
+import { createContext, useContext, useState, type ReactNode } from "react"
 import type { Usuario } from "../types/Usuario"
 
 interface AuthContextType {
@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const storedUsuario = localStorage.getItem("usuario")
         if (storedUsuario) {
             try{
-                setUsuario(JSON.parse(storedUsuario))
+                 return JSON.parse(storedUsuario);
             }catch(e){
                 localStorage.removeItem("usuario")
             }
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const login = (usuario: Usuario) => {
         localStorage.setItem("usuario", JSON.stringify(usuario))
-        setUsuario(null)
+        setUsuario(usuario);
     }
 
     const logout = () => {

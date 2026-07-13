@@ -12,6 +12,7 @@ const AllGames = () => {
     const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()
     const [abierto, setAbierto] = useState(false)
     const [juegoSeleccionado, setJuegoSeleccionado] = useState<any>(null)
+    const [cantidad, setCantidad] = useState(1)
 
     if (cargando) return (
         <div className="p-20 text-center space-y-4">
@@ -130,14 +131,37 @@ console.log(videojuegos.map(v => v.id));
                                 
                                 {/* LISTA DE 7+ DATOS */}
                                 <ul className="text-sm text-zinc-600 space-y-2 border-t pt-4">
-                                    <li><strong>Marca:</strong> {juegoSeleccionado.marca}</li>
-                                    <li><strong>SKU:</strong> {juegoSeleccionado.sku}</li>
-                                    <li><strong>Garantía:</strong> {juegoSeleccionado.garantia_meses} meses</li>
-                                    <li><strong>Stock:</strong> {juegoSeleccionado.stock} unidades</li>
-                                    <li><strong>Categoría ID:</strong> {juegoSeleccionado.id_categoria}</li>
-                                    <li><strong>Peso:</strong> {juegoSeleccionado.peso}</li>
-                                    <li><strong>Dimensiones:</strong> {juegoSeleccionado.dimensiones}</li>
+                                    <li><strong>Nombre:</strong> {juegoSeleccionado.nombre}</li>
+                                    <li><strong>Resena:</strong> {juegoSeleccionado.resena}</li>
+                                    <li><strong>Rating:</strong> {juegoSeleccionado.rating}</li>
+                                    <li><strong>Plataforma:</strong> {juegoSeleccionado.plataforma}</li>
+                                    <li><strong>Desarrollado por:</strong> {juegoSeleccionado.desarrollador}</li>
+                                    <li><strong>Pros:</strong> {juegoSeleccionado.pros}</li>
+                                    <li><strong>Contras:</strong> {juegoSeleccionado.contras}</li>
                                 </ul>
+
+                                <div className="flex items-center gap-4 pt-4">
+                                    <div className="flex items-center border border-zinc-300 rounded-lg overflow-hidden">
+                                        <button onClick={() => setCantidad(c => Math.max(1, c - 1))} className="px-4 py-2 hover:bg-zinc-100">-</button>
+                                        <span className="px-4 font-bold">{cantidad}</span>
+                                        <button onClick={() => setCantidad(c => Math.min(juegoSeleccionado.rating, c + 1))} className="px-4 py-2 hover:bg-zinc-100">+</button>
+                                    </div>
+                                    
+                                    <button 
+                                        onClick={() => {
+                                            agregarFavoritos(
+                                                juegoSeleccionado.id_componente, 
+                                                juegoSeleccionado.nombre, 
+                                                juegoSeleccionado.rating,
+                                                juegoSeleccionado.plataforma
+                                            );
+                                            setJuegoSeleccionado(null);
+                                        }}
+                                        className="flex-1 py-2 bg-[#C1FF00] hover:bg-[#b0eb00] font-black uppercase text-xs rounded-lg transition-all"
+                                    >
+                                        Agregar como favorito
+                                    </button>
+                                </div>
 
                                 
                             </div>
