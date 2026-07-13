@@ -5,11 +5,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import { agregarFavoritos } from "../../utils/functions";
+import type { Videojuego } from "../../types/videojuegos";
 
 
 const MejoresJuegos = () => {
     const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()
     const [abierto, setAbierto] = useState(false)
+    const [juegoSeleccionado, setJuegoSeleccionado] = useState<any>(null)
+
+    const abrirModal = (videojuego: Videojuego) => {
+    setJuegoSeleccionado(videojuego);
+    setAbierto(true);
+};
+
+const cerrarModal = () => {
+    setAbierto(false);
+    setJuegoSeleccionado(null);
+};
 
     const ratingMinimo = 9.7;
 
@@ -32,7 +44,7 @@ const MejoresJuegos = () => {
 
     return (
         <>
-        <Header imagen="img1.jpg" titulo="Mejores juegos" parrafo="Ponte al día con los mejores juegos!" />
+        <Header imagen="img10.jpg" titulo="Mejores juegos" parrafo="Ponte al día con los mejores juegos!" />
              <div className="bg-[#1a1a1a] p-8 font-sans justify-centers shadow-black">
                     <button onClick={() => setAbierto(!abierto)}
                             className="flex w-full justify-between items-center  md:bg-transparent border
@@ -68,15 +80,18 @@ const MejoresJuegos = () => {
                                 flex items-center justify-center gap-3"
                             >
                                     
-                                    <Link
-                                      key={videojuegos.id}
-                                      to={`/populares/${videojuegos.id}`}
-                                      className="flex pointer-events-auto
-                                                    items-center cursor-pointer justify-center w-10 h-10 rounded-full bg-white text-slate-800 hover:bg-blue-500
-                                                 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 shadow-lg focus:ring-2 focus:bg-blue-500`">
-                                    
-                                    <FontAwesomeIcon icon={faEye} />
-                                    </Link>
+                                    <button
+    type="button"
+    onClick={() => abrirModal(videojuegos)}
+    className="flex pointer-events-auto
+               items-center justify-center
+               w-10 h-10 rounded-full
+               bg-white text-slate-800
+               hover:bg-blue-500 hover:text-white
+               transition"
+>
+    <FontAwesomeIcon icon={faEye}/>
+</button>
                                     <button
                                                                   type="button"
                                                                   onClick={() =>
@@ -94,7 +109,14 @@ const MejoresJuegos = () => {
                                                                         
                                                                           <FontAwesomeIcon icon={faStar} />
                                                                         </button>
+                                                                        <Link
+    to={`/populares/${videojuegos.id}`}
+    className="pointer-events-auto bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition"
+>
+    Ver detalles
+</Link>
                                                                       </div>
+                                                                      
                                     
                                                                       
                                                                     </figure>
@@ -110,6 +132,36 @@ const MejoresJuegos = () => {
                             </div>
                         )}
             </div>
+            {abierto && juegoSeleccionado && (
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+
+        <div className="bg-white rounded-lg w-[500px] p-6 relative">
+
+            <button
+                onClick={cerrarModal}
+                className="absolute top-3 right-3 text-xl"
+            >
+                ✕
+            </button>
+
+            <img
+                src={juegoSeleccionado.imagen_url}
+                alt={juegoSeleccionado.nombre}
+                className="w-full h-60 object-cover rounded"
+            />
+
+            <h2 className="text-2xl font-bold mt-4">
+                {juegoSeleccionado.nombre}
+            </h2>
+
+            <p>⭐ Rating: {juegoSeleccionado.rating}</p>
+
+            <p>🎮 Plataforma: {juegoSeleccionado.plataforma}</p>
+
+        </div>
+
+    </div>
+)}
         </>
     )
 }

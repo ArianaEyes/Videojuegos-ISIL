@@ -30,7 +30,7 @@ const AllGames = () => {
 console.log(videojuegos.map(v => v.id));
     return (
     <>
-    <Header imagen="img1.jpg" titulo="Todos los juegos" parrafo="Descubre cada videojuego. y sus detalles!" />
+    <Header imagen="img9.jpg" titulo="Todos los juegos" parrafo="Descubre cada videojuego. y sus detalles!" />
      <div className="bg-[#1a1a1a] p-8 font-sans justify-centers shadow-black">
             <button onClick={() => setAbierto(!abierto)}
                     className="flex w-full justify-between items-center  md:bg-transparent border

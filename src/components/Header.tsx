@@ -26,7 +26,7 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
         <div className="title-div grid-cols-2 grid">
           <div><p className='m-auto'>{parrafo}</p></div>
           
-          <button className="btn-home m-auto flex ">Buy Now </button>
+          <button className="btn-home flex ">Ver más</button>
         </div>
       </div>
 
@@ -46,9 +46,9 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
           
         </NavLink>
          {isAuthenticated ? (
-          <div className="flex items-center gap-2">
+          <div className=" authenticated flex items-center gap-2">
 
-            <button className='bg-[#ff0000a2] hover:bg-white hover:text-black font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-lg shadow-black/20 cursor-pointer text-sm tracking-widest uppercase'>
+            <button className='btn-pucharse hover:bg-white hover:text-black font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-lg shadow-black/20 cursor-pointer text-sm tracking-widest uppercase'>
             <Link to="/login">
             <FontAwesomeIcon icon={faIdCard} className="size-2 mr-1" />
               Perfil
@@ -58,7 +58,8 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
             <button 
               type="button"
               onClick={logout}
-              className="px-5 py-3 border border-slate-800 hover:border-red-500 hover:text-red-500 rounded-full         cursor-pointer text-sm font-bold tracking-widest uppercase transition-all duration-300"
+              className="px-2 py-1 border 
+              border-slate-800 hover:border-red-500 hover:text-red-500 rounded-md cursor-pointer  transition-all duration-300 btn-logout"
             >
               Cerrar sesión
             </button>
