@@ -7,12 +7,22 @@ import { faEye } from "@fortawesome/free-solid-svg-icons"
 import Header from "../../components/Header";
 import { agregarFavoritos } from "../../utils/functions";
 import Footer from "../../common/Footer";
+import type { Videojuego } from "../../types/videojuegos";
  
 const AllGames = () => {
     const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()
     const [abierto, setAbierto] = useState(false)
-    const [juegoSeleccionado, setJuegoSeleccionado] = useState<any>(null)
-    const [cantidad, setCantidad] = useState(1)
+        const [juegoSeleccionado, setJuegoSeleccionado] = useState<any>(null)
+    
+        const abrirModal = (videojuego: Videojuego) => {
+        setJuegoSeleccionado(videojuego);
+        setAbierto(true);
+    };
+    
+    const cerrarModal = () => {
+        setAbierto(false);
+        setJuegoSeleccionado(null);
+    };
 
     if (cargando) return (
         <div className="p-20 text-center space-y-4">
@@ -46,128 +56,108 @@ console.log(videojuegos.map(v => v.id));
                     <div className="block">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
 
-                        {videojuegos.map(itemVideojuegos => (
-                            <div>
+                        {videojuegos.map(videojuegos => (
+                                    <div>
                             <figure
-                            key={itemVideojuegos.id}
+                            key={videojuegos.id}
                             className="group relative overflow-hidden rounded-md"
                             >
   <div className="w-full h-56 overflow-hidden rounded-md">
     <img
-      src={itemVideojuegos.imagen_url}
-      alt={itemVideojuegos.nombre}
+      src={videojuegos.imagen_url}
+      alt={videojuegos.nombre}
       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
     />
   </div>
-
-                    <div
+   <div
                          className="absolute inset-0 bg-black/60
                              opacity-0 group-hover:opacity-100
                                 transition-opacity duration-300
                                 flex items-center justify-center gap-3"
                             >
-                         <Link
-                           to={`/allgames/${itemVideojuegos.id}`}
-                            className={`flex pointer-events-auto
-                                                    items-center cursor-pointer justify-center w-10 h-10 rounded-full bg-white text-slate-800 hover:bg-blue-500
-                                                 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 shadow-lg focus:ring-2 focus:bg-blue-500`}>
-                         
-                            <FontAwesomeIcon icon={faEye} />
-                         </Link>
-
-                            <button
-                              type="button"
-                              onClick={() =>
-                                agregarFavoritos(
-                                  itemVideojuegos.id,
-                                  itemVideojuegos.nombre,
-                                  itemVideojuegos.rating,
-                                  itemVideojuegos.plataforma
-                                )
-                              }
-                                className={`flex pointer-events-auto
-                                                    items-center cursor-pointer justify-center w-10 h-10 rounded-full bg-white text-slate-800 hover:bg-yellow-500
-                                                 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 shadow-lg focus:ring-2 focus:bg-yellow-500`}>
-                                                
                                     
-                                      <FontAwesomeIcon icon={faStar} />
-                                    </button>
-                                  </div>
-
-                                  
-                                </figure>
-                                <div className="mt-3 text-center">
-                                    <h3 className="text-white font-bold text-lg">
-                                      Juegos {itemVideojuegos.nombre}
-                                    </h3>
-                                  </div>
+                                    <button
+    type="button"
+    onClick={() => abrirModal(videojuegos)}
+    className="flex pointer-events-auto
+               items-center justify-center
+               w-10 h-10 rounded-full
+               bg-white text-slate-800
+               hover:bg-blue-500 hover:text-white
+               transition"
+>
+    <FontAwesomeIcon icon={faEye}/>
+</button>
+                                    <button
+                                                                  type="button"
+                                                                  onClick={() =>
+                                                                    agregarFavoritos(
+                                                                      videojuegos.id,
+                                                                      videojuegos.nombre,
+                                                                      videojuegos.rating,
+                                                                      videojuegos.plataforma
+                                                                    )
+                                                                  }
+                                                                    className={`flex pointer-events-auto
+                                                                                        items-center cursor-pointer justify-center w-10 h-10 rounded-full bg-white text-slate-800 hover:bg-yellow-500
+                                                                                     hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 shadow-lg focus:ring-2 focus:bg-yellow-500`}>
+                                                                                    
+                                                                        
+                                                                          <FontAwesomeIcon icon={faStar} />
+                                                                        </button>
+                                                                        <Link
+    to={`/populares/${videojuegos.id}`}
+    className="pointer-events-auto bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition"
+>
+    Ver detalles
+</Link>
+                                                                      </div>
+                                                                      
+                                    
+                                                                      
+                                                                    </figure>
+                                                                    <div className="mt-3 text-center">
+                                                                        <h3 className="text-white font-bold text-lg">
+                                                                          Juegos {videojuegos.nombre}
+                                                                        </h3>
+                                                                      </div>
+                                                                    </div>
+                                    ))} 
+        
                                 </div>
-                            ))} 
-                            
-                        </div>
-                    </div>
-                )}
+                            </div>
+                        )}
+            </div>
+            <Footer/>
+            {abierto && juegoSeleccionado && (
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+
+        <div className="bg-white rounded-lg w-[500px] p-6 relative">
+
+            <button
+                onClick={cerrarModal}
+                className="absolute top-3 right-3 text-xl"
+            >
+                ✕
+            </button>
+
+            <img
+                src={juegoSeleccionado.imagen_url}
+                alt={juegoSeleccionado.nombre}
+                className="w-full h-60 object-cover rounded"
+            />
+
+            <h2 className="text-2xl font-bold mt-4">
+                {juegoSeleccionado.nombre}
+            </h2>
+
+            <p>⭐ Rating: {juegoSeleccionado.rating}</p>
+
+            <p>🎮 Plataforma: {juegoSeleccionado.plataforma}</p>
+
+        </div>
 
     </div>
-    <Footer/>
-
-      {/* MODAL CON IMAGEN GRANDE Y 7+ DATOS */}
-            {juegoSeleccionado && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-                    <div className="bg-white rounded-2xl w-full max-w-3xl relative shadow-2xl p-8">
-                        <button onClick={() => setJuegoSeleccionado(null)} className="absolute top-4 right-4 text-zinc-400 hover:text-black">
-                            <FontAwesomeIcon icon={faTimes} size="lg" />
-                        </button>
-                        
-                        <div className="flex flex-col md:flex-row gap-8">
-                            {/* IMAGEN MÁS GRANDE */}
-                            <div className="w-full md:w-1/2 bg-zinc-50 rounded-xl p-6 flex items-center justify-center">
-                                <img src={juegoSeleccionado.imagen_url} alt={juegoSeleccionado.nombre} className="max-h-80 object-contain" />
-                            </div>
-                            
-                            <div className="w-full md:w-1/2 space-y-4">
-                                <h3 className="text-2xl font-black">{juegoSeleccionado.nombre}</h3>
-                                <p className="text-[#C1FF00] font-bold text-3xl">{juegoSeleccionado.precio}</p>
-                                
-                                {/* LISTA DE 7+ DATOS */}
-                                <ul className="text-sm text-zinc-600 space-y-2 border-t pt-4">
-                                    <li><strong>Nombre:</strong> {juegoSeleccionado.nombre}</li>
-                                    <li><strong>Resena:</strong> {juegoSeleccionado.resena}</li>
-                                    <li><strong>Rating:</strong> {juegoSeleccionado.rating}</li>
-                                    <li><strong>Plataforma:</strong> {juegoSeleccionado.plataforma}</li>
-                                    <li><strong>Desarrollado por:</strong> {juegoSeleccionado.desarrollador}</li>
-                                    <li><strong>Pros:</strong> {juegoSeleccionado.pros}</li>
-                                    <li><strong>Contras:</strong> {juegoSeleccionado.contras}</li>
-                                </ul>
-
-                                <div className="flex items-center gap-4 pt-4">
-                                    <div className="flex items-center border border-zinc-300 rounded-lg overflow-hidden">
-                                        <button onClick={() => setCantidad(c => Math.max(1, c - 1))} className="px-4 py-2 hover:bg-zinc-100">-</button>
-                                        <span className="px-4 font-bold">{cantidad}</span>
-                                        <button onClick={() => setCantidad(c => Math.min(juegoSeleccionado.rating, c + 1))} className="px-4 py-2 hover:bg-zinc-100">+</button>
-                                    </div>
-                                    
-                                    <button 
-                                        onClick={() => {
-                                            agregarFavoritos(
-                                                juegoSeleccionado.id_componente, 
-                                                juegoSeleccionado.nombre, 
-                                                juegoSeleccionado.rating,
-                                                juegoSeleccionado.plataforma
-                                            );
-                                            setJuegoSeleccionado(null);
-                                        }}
-                                        className="flex-1 py-2 bg-[#C1FF00] hover:bg-[#b0eb00] font-black uppercase text-xs rounded-lg transition-all"
-                                    >
-                                        Agregar como favorito
-                                    </button>
-                                </div>
-
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
             )}
     </>
     )
