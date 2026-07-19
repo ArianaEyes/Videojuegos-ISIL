@@ -128,7 +128,7 @@ const GestionVideojuegos = () => {
         className="cursor-pointer bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-mono font-bold py-2 px-6 rounded shadow-[0_0_10px_rgba(255,0,0,0.15)] hover:shadow-[0_0_20px_rgba(255,0,0,0.4)] transition-all duration-300 mb-8 tracking-wide"
         onClick={() => setMostrarModal({tipo: 'insert'})}
                 >
-                    [+] REGISTRAR HARDWARE
+                    [+] REGISTRAR VIDEOJUEGO
                 </button>
                 
     
