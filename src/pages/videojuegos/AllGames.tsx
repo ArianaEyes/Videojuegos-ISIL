@@ -1,18 +1,34 @@
 import { useState } from "react";
-import { useVideojuegos } from "./useVideojuegos";
-import { faChevronUp, faChevronDown, faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useVideojuegoPaginado } from "./useVideojuegoPaginado";
+import { faChevronUp, faChevronDown,faEye, faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
-import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { Link, useSearchParams } from "react-router-dom";
 import Header from "../../components/Header";
 import { agregarFavoritos } from "../../utils/functions";
 import Footer from "../../common/Footer";
  
 const AllGames = () => {
-    const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()
+    const {videojuegos, cargando,error, hasVideojuegos,isPlaceholderData} = useVideojuegoPaginado()
     const [abierto, setAbierto] = useState(false)
     const [juegoSeleccionado, setJuegoSeleccionado] = useState<any>(null)
     const [cantidad, setCantidad] = useState(1)
+
+    const [searchParams,setSearchParams] = useSearchParams()
+    const [busquedaLocal, setBusquedaLocal] = useState(searchParams.get("texto_buscar")||"")
+
+    const manejarBusqueda = (e: React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault()
+        if(busquedaLocal.trim() != ''){
+            searchParams.set('texto_buscar', busquedaLocal)
+        }else{
+            searchParams.delete("texto_buscar")
+        }
+        searchParams.delete("pagina")
+        searchParams.delete("columna_orden")
+        searchParams.delete("tipo_orden")
+        setSearchParams(searchParams)
+
+    }
 
     if (cargando) return (
         <div className="p-20 text-center space-y-4">
@@ -27,7 +43,6 @@ const AllGames = () => {
         </div>
     )
     
-console.log(videojuegos.map(v => v.id));
     return (
     <>
     <Header imagen="img9.jpg" titulo="Todos los juegos" parrafo="Descubre cada videojuego. y sus detalles!" />
@@ -40,16 +55,57 @@ console.log(videojuegos.map(v => v.id));
                         <FontAwesomeIcon icon={abierto ? faChevronUp : faChevronDown} />
                     </span>
                 </button>
-            {!hasVideojuegos ? (
-                    <div>No se encotraron datos de videojuegos</div>
+                <form
+    onSubmit={manejarBusqueda}
+    className="flex justify-center items-center gap-3 w-full my-6"
+>
+    <input
+        type="text"
+        placeholder="Buscar marca, país o fundador..."
+        value={busquedaLocal}
+        onChange={(e) => setBusquedaLocal(e.target.value)}
+        className="
+            w-full max-w-lg
+            px-4 py-2.5
+            bg-gray-900
+            text-white
+            placeholder:text-gray-400
+            border border-gray-700
+            rounded-lg
+            outline-none
+            transition-all duration-200
+            focus:border-red-600
+            focus:ring-2 focus:ring-red-600/40
+        "
+    />
+
+    <button
+        type="submit"
+        className="
+            px-6 py-2.5
+            bg-red-600
+            text-white
+            font-medium
+            rounded-lg
+            transition-all duration-200
+            hover:bg-red-700
+            hover:shadow-[0_0_12px_rgba(220,38,38,0.5)]
+            active:scale-95
+        "
+    >
+        Buscar
+    </button>
+</form>
+            <div className={`transition-opacity duration-200 ${isPlaceholderData ? 'opacity-50': 'opacity-100'}`}>
+                {!hasVideojuegos ? (
+                    <div className="text-red-800">No se encotraron datos de videojuegos</div>
                 ) : (
                     <div className="block">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[70%] "style={{ margin: '2.5rem auto' }}>
 
                         {videojuegos.map(itemVideojuegos => (
-                            <div>
+                            <div key={itemVideojuegos.id}>
                             <figure
-                            key={itemVideojuegos.id}
                             className="group relative overflow-hidden rounded-md"
                             >
   <div className="w-full h-56 overflow-hidden rounded-md">
@@ -107,6 +163,7 @@ console.log(videojuegos.map(v => v.id));
                         </div>
                     </div>
                 )}
+            </div>
 
     </div>
     <Footer/>

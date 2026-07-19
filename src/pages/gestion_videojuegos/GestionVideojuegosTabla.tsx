@@ -3,16 +3,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useGestorVideojuegos } from './useGestorVideojuegos'
+import { useSearchParams } from 'react-router-dom'
+import Paginacion from './Paginacion'
+import Footer from '../../common/Footer'
 
 const GestionVideojuegos = () => {
-    const { videojuegos,cargando, error, hasVideojuegos,
+    const { videojuegos,cargando, error, hasVideojuegos,paginacion,
         insertVideojuego, updateVideojuego, deleteVideojuego} = useGestorVideojuegos()
+    const [parametros, setParametros] = useSearchParams()
+
+    const manejarOrden = (columna: string) => {
+    const nuevosParametros = new URLSearchParams(parametros);
+
+    const ordenActual = nuevosParametros.get("ordenar_por");
+    const tipoActual = nuevosParametros.get("direccion");
+
+    let nuevoTipo = "ASC";
+    if (ordenActual === columna && tipoActual === "ASC") {
+        nuevoTipo = "DESC";
+    }
+
+    nuevosParametros.set("ordenar_por", columna);
+    nuevosParametros.set("direccion", nuevoTipo);
+    nuevosParametros.set('pagina', '1');
+    setParametros(nuevosParametros)
+    
+};
 
     const [mostrarModal, setMostrarModal] =
         useState<{tipo:'insert' | 'update' | 'delete' | null}>({tipo : null})
-
     const [id, setId] = useState("")
-
     const [nombre, setNombre] = useState("")
     const [id_genero, setIdgenero] = useState(0)
     const [desarrollador, setDesarrollador] = useState("")
@@ -25,6 +45,25 @@ const GestionVideojuegos = () => {
     const [pros, setPros] = useState("")
     const [contras, setContras] = useState("")
     
+    const [searchParams,setSearchParams] = useSearchParams()
+    const [busquedaLocal, setBusquedaLocal] = useState(searchParams.get("texto_buscar")||"")
+
+    const manejarBusqueda = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const nuevos = new URLSearchParams(searchParams);
+
+    if (busquedaLocal.trim() !== "") {
+        nuevos.set("texto_buscar", busquedaLocal);
+    } else {
+        nuevos.delete("texto_buscar");
+    }
+
+    nuevos.set("pagina", "1");
+
+    setSearchParams(nuevos);
+};
+
     const cerrarModal = () =>{
         setMostrarModal({tipo:null})
         setId("")
@@ -76,13 +115,14 @@ const GestionVideojuegos = () => {
     if(cargando) return(
         <div>Cargando videojuegos...</div>
     )
-
      if (error)
     return (<div>Ocurrió un error</div>)
+
+    
   
   return (
     <>
-    <div className="w-full bg-[#1a1a1a] p-8 font-sans justify-centers shadow-black ">
+    <div className="w-full bg-zinc-900 p-8 font-sans justify-centers shadow-black ">
             <div className="max-w-6xl mx-auto">
     <button 
         className="cursor-pointer bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-mono font-bold py-2 px-6 rounded shadow-[0_0_10px_rgba(255,0,0,0.15)] hover:shadow-[0_0_20px_rgba(255,0,0,0.4)] transition-all duration-300 mb-8 tracking-wide"
@@ -90,19 +130,63 @@ const GestionVideojuegos = () => {
                 >
                     [+] REGISTRAR HARDWARE
                 </button>
+                
     
      {!hasVideojuegos ? (
             <div>Favoritos está vacío</div>
         ) : (
+            
             <div>
+                <form
+    onSubmit={manejarBusqueda}
+    className="flex justify-center items-center gap-3 w-full my-6"
+>
+    <input
+        type="text"
+        placeholder="Buscar marca, país o fundador..."
+        value={busquedaLocal}
+        onChange={(e) => setBusquedaLocal(e.target.value)}
+        className="
+            w-full max-w-lg
+            px-4 py-2.5
+            bg-gray-900
+            text-white
+            placeholder:text-gray-400
+            border border-gray-700
+            rounded-lg
+            outline-none
+            transition-all duration-200
+            focus:border-red-600
+            focus:ring-2 focus:ring-red-600/40
+        "
+    />
+
+    <button
+        type="submit"
+        className="
+            px-6 py-2.5
+            bg-red-600
+            text-white
+            font-medium
+            rounded-lg
+            transition-all duration-200
+            hover:bg-red-700
+            hover:shadow-[0_0_12px_rgba(220,38,38,0.5)]
+            active:scale-95
+        "
+    >
+        Buscar
+    </button>
+</form>
             <div className={tableStyles.container}>
             <table className={tableStyles.table}>
                 <thead className={tableStyles.thead}>
                     <tr className={tableStyles.tr}>
-                        <th className={tableStyles.th}>Código</th>
-                        <th className={tableStyles.th}>Nombre</th>
-                        <th className={tableStyles.th}>Rating</th>
-                        <th className={tableStyles.th}>Plataforma</th>
+                        <th className={tableStyles.th} onClick={() =>manejarOrden('id')}>Código</th>
+                        <th className={tableStyles.th} onClick={() =>manejarOrden('nombre')}>Nombre</th>
+                        <th className={tableStyles.th} onClick={() =>manejarOrden('rating')}>Rating</th>
+                        <th className={tableStyles.th} onClick={() =>manejarOrden('plataforma')}>Plataforma</th>
+                        <th className={tableStyles.th}></th>
                         <th className={tableStyles.th}></th>
                     </tr>
                 </thead>
@@ -154,12 +238,17 @@ const GestionVideojuegos = () => {
             
             </div>
 
-            {/* <button className='mt-6 text-ms text-red-500 hover:text-red-700 cursor-pointer'
-            >
-                Vaciar de favoritos
-            </button> */}
+            
             </div>
         )} 
+        {paginacion && (
+            <Paginacion
+             paginaActual={paginacion.pagina_actual}
+             totalPaginas={paginacion.total_paginas}
+            />
+        )}
+        
+
         {mostrarModal.tipo && (
              <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex justify-center items-center z-50 p-4">
                         <div className="bg-[#0e0e0e] border border-[#ff0000]/30 p-9 m-auto rounded-xl shadow-[0_0_30px_rgba(255,0,0,0.1)] w-[43%] relative overflow-hidden">
@@ -282,8 +371,10 @@ const GestionVideojuegos = () => {
                     </div>
         )}
         </div>
+        
      
     </div>
+    <Footer/>
     
     </>
   )

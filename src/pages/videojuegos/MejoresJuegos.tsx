@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useVideojuegos } from "./useVideojuegos";
 import { faChevronUp, faChevronDown, faStar, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import { agregarFavoritos } from "../../utils/functions";
 import type { Videojuego } from "../../types/videojuegos";
+import { useTodosLosVideojuegos } from "./useTodosLosVideojuegos";
 
 
 const MejoresJuegos = () => {
-    const {videojuegos, cargando,error, hasVideojuegos} = useVideojuegos()
+    const {videojuegos, cargando,error, hasVideojuegos} = useTodosLosVideojuegos()
     const [abierto, setAbierto] = useState(false)
     const [juegoSeleccionado, setJuegoSeleccionado] = useState<any>(null)
 

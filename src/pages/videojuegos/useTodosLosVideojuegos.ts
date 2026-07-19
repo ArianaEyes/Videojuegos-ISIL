@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodosLosJuegos } from "../../services/videojuegos.services";
 
-
-export const useVideojuegos = () => {
+export const useTodosLosVideojuegos = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["videojuegos"],
     queryFn: ({ signal }) => fetchTodosLosJuegos(signal),

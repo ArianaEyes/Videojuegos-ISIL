@@ -4,6 +4,7 @@ export const CONFIG = {
 
   ENDPOINTS: {
     VIDEOJUEGOS: "/videojuegos.php",
+    VIDEOJUEGOS_PAGINADOS: "/videojuegos_paginados.php",
     GENEROS: "/generos.php",
     RESENAS_USUARIOS: "/resenas_usuarios.php",
     LOGIN: "/login.php",

@@ -35,11 +35,11 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
           <div className="logo"></div>
       <nav>
         
-        <Link to="/"><h5 className=' text-white tracking-tighter cursor-pointer'>Géneros</h5></Link>
-        <Link to="/allgames"><h5 className=' text-white tracking-tighter cursor-pointer'>Todos los juegos</h5></Link>
-        <Link to="/populares"><h5 className=' text-white tracking-tighter cursor-pointer'>Juegos populares</h5></Link>
-        <Link to="/contact"><h5 className=' text-white tracking-tighter cursor-pointer'>Contact Us</h5></Link>
-        <Link to="/añadir"><h5 className=' text-white tracking-tighter cursor-pointer'>Añadir</h5></Link>
+        <Link to="/"><h5 className="text-gray-200 hover:text-red-700 transition-colors duration-200 cursor-pointer">Géneros</h5></Link>
+        <Link to="/allgames"><h5 className="text-gray-200 hover:text-red-700 transition-colors duration-200 cursor-pointer">Todos los juegos</h5></Link>
+        <Link to="/populares"><h5 className="text-gray-200 hover:text-red-700 transition-colors duration-200 cursor-pointer">Juegos populares</h5></Link>
+        <Link to="/contact"><h5 className="text-gray-200 hover:text-red-700 transition-colors duration-200 cursor-pointer">Contact Us</h5></Link>
+        <Link to="/añadir"><h5 className="text-gray-200 hover:text-red-700 transition-colors duration-200 cursor-pointer">Añadir</h5></Link>
         <NavLink to="/favoritos" className={`${navLinkStyles} navlink`} title="Carrito de compras">
           <FontAwesomeIcon icon={faStar} className="size-4" /> 
           <h5>Favoritos</h5>
@@ -58,8 +58,7 @@ const Header = ({ imagen, titulo, parrafo }: HeaderProps) => {
             <button 
               type="button"
               onClick={logout}
-              className="px-2 py-1 border 
-              border-slate-800 hover:border-red-500 hover:text-red-500 rounded-md cursor-pointer  transition-all duration-300 btn-logout"
+              className="px-2 py-1 border border-slate-800 hover:border-red-500 hover:text-red-500 rounded-md cursor-pointer transition-all duration-300 btn-logout"
             >
               Cerrar sesión
             </button>

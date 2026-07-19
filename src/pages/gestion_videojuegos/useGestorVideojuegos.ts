@@ -4,14 +4,22 @@ import {
   insertJuegos,
   updateVideojuego,
   deleteVideojuego,
+  fetchPaginacion,
 } from "../../services/videojuegos.services";
+import { useSearchParams } from "react-router-dom";
 
 export const useGestorVideojuegos = () => {
   const queryClient = useQueryClient();
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["videojuegos"],
-    queryFn: ({ signal }) => fetchTodosLosJuegos(signal),
+  const [searchParams] = useSearchParams();
+  const queryString = searchParams.toString();
+
+  const { data, isLoading, error, isPlaceholderData } = useQuery({
+    queryKey: ["videojuegos", queryString],
+    queryFn: ({ signal }) => fetchPaginacion(queryString, signal),
+    placeholderData: (previousData) => previousData,
   });
+  const juegos = data?.datos || [];
+  const infoPaginacion = data?.paginacion;
   const insertMutation = useMutation({
     mutationFn: ({
       nombre,
@@ -114,13 +122,15 @@ export const useGestorVideojuegos = () => {
   });
 
   return {
-    videojuegos: data ?? [],
+    videojuegos: juegos,
     cargando: isLoading,
     error: error ? error.message : null,
-    hasVideojuegos: (data?.length ?? 0) > 0,
+    hasVideojuegos: juegos.length > 0,
+    paginacion: infoPaginacion,
 
     insertVideojuego: insertMutation.mutateAsync,
     updateVideojuego: updateMutation.mutateAsync,
     deleteVideojuego: deleteMutation.mutateAsync,
+    isPlaceholderData,
   };
 };

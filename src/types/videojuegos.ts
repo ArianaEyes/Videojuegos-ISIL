@@ -12,3 +12,15 @@ export interface Videojuego {
   pros: string;
   contras: string;
 }
+
+export interface PaginacionInfo {
+  total_registros: number;
+  total_paginas: number;
+  pagina_actual: number;
+  limite_por_pag: number;
+}
+
+export interface VideojuegoResponse {
+  paginacion: PaginacionInfo;
+  datos: Videojuego[];
+}

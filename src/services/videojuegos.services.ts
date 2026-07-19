@@ -1,7 +1,8 @@
 import { CONFIG } from "../config";
-import type { Videojuego } from "../types/videojuegos";
+import type { Videojuego, VideojuegoResponse } from "../types/videojuegos";
 
 const API_URL = `${CONFIG.API_URL}${CONFIG.ENDPOINTS.VIDEOJUEGOS}`;
+const API_URL_P = `${CONFIG.API_URL}${CONFIG.ENDPOINTS.VIDEOJUEGOS_PAGINADOS}`;
 
 export const fetchVideojuegosGenero = async (
   id_genero?: number,
@@ -27,6 +28,22 @@ export const fetchTodosLosJuegos = async (
   if (!response.ok) {
     throw new Error(
       `Error al obtener videjuegos: ${response.status} ${response.statusText}`,
+    );
+  }
+  return response.json();
+};
+
+export const fetchPaginacion = async (
+  queryString: string,
+  signal?: AbortSignal,
+): Promise<VideojuegoResponse> => {
+  const urlConParametros = queryString
+    ? `${API_URL_P}?${queryString}`
+    : API_URL_P;
+  const response = await fetch(urlConParametros, { signal });
+  if (!response.ok) {
+    throw new Error(
+      `Error al obtener la páginacion de videjuegos: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();
