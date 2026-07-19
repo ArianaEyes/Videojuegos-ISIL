@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import { agregarFavoritos } from "../../utils/functions";
 import type { Videojuego } from "../../types/videojuegos";
 import { useTodosLosVideojuegos } from "./useTodosLosVideojuegos";
+import Footer from "../../common/Footer";
 
 
 const MejoresJuegos = () => {
@@ -132,6 +133,7 @@ const cerrarModal = () => {
                             </div>
                         )}
             </div>
+            <Footer/>
             {abierto && juegoSeleccionado && (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
 
